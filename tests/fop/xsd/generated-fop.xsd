@@ -1,0 +1,3328 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns:fo="http://www.w3.org/1999/XSL/Format" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.w3.org/1999/XSL/Format" elementFormDefault="qualified">
+ <group name="block_List">
+  <choice>
+   <group ref="fo:block_List_FOP"/>
+   <group ref="fo:block_List_Not"/>
+  </choice>
+ </group>
+ <group name="float_List">
+  <choice>
+   <group ref="fo:float_List_Not"/>
+  </choice>
+ </group>
+ <group name="footnote_List">
+  <choice>
+   <element ref="fo:footnote"/>
+  </choice>
+ </group>
+ <group name="initial_property_set_List">
+  <choice>
+   <group ref="fo:initial_property_set_List_Not"/>
+  </choice>
+ </group>
+ <group name="inline_List">
+  <choice>
+   <group ref="fo:inline_List_FOP"/>
+   <group ref="fo:inline_List_Not"/>
+  </choice>
+ </group>
+ <group name="marker_List">
+  <choice>
+   <element ref="fo:marker"/>
+  </choice>
+ </group>
+ <group name="neutral_List">
+  <choice>
+   <group ref="fo:neutral_List_FOP"/>
+   <group ref="fo:neutral_List_Not"/>
+  </choice>
+ </group>
+ <group name="block_List_FOP">
+  <choice>
+   <element ref="fo:block"/>
+   <element ref="fo:block-container"/>
+   <element ref="fo:table"/>
+   <element ref="fo:list-block"/>
+  </choice>
+ </group>
+ <group name="inline_List_FOP">
+  <choice>
+   <element ref="fo:character"/>
+   <element ref="fo:external-graphic"/>
+   <element ref="fo:instream-foreign-object"/>
+   <element ref="fo:inline"/>
+   <element ref="fo:leader"/>
+   <element ref="fo:page-number"/>
+   <element ref="fo:page-number-citation"/>
+   <element ref="fo:basic-link"/>
+  </choice>
+ </group>
+ <group name="neutral_List_FOP">
+  <choice>
+   <element ref="fo:wrapper"/>
+   <element ref="fo:retrieve-marker"/>
+  </choice>
+ </group>
+ <group name="block_List_Not">
+  <choice>
+   <element ref="fo:table-and-caption"/>
+  </choice>
+ </group>
+ <group name="float_List_Not">
+  <choice>
+   <element ref="fo:float"/>
+  </choice>
+ </group>
+ <group name="initial_property_set_List_Not">
+  <choice>
+   <element ref="fo:initial-property-set"/>
+  </choice>
+ </group>
+ <group name="inline_List_Not">
+  <choice>
+   <element ref="fo:bidi-override"/>
+   <element ref="fo:inline-container"/>
+   <element ref="fo:multi-toggle"/>
+  </choice>
+ </group>
+ <group name="neutral_List_Not">
+  <choice>
+   <element ref="fo:multi-switch"/>
+   <element ref="fo:multi-properties"/>
+  </choice>
+ </group>
+ <simpleType name="absolute_size_Type">
+  <restriction base="NMTOKEN">
+   <enumeration value="xx-small"/>
+   <enumeration value="x-small"/>
+   <enumeration value="small"/>
+   <enumeration value="medium"/>
+   <enumeration value="large"/>
+   <enumeration value="x-large"/>
+   <enumeration value="xx-large"/>
+  </restriction>
+ </simpleType>
+ <simpleType name="alignment_Type">
+  <restriction base="NMTOKEN">
+   <enumeration value="baseline"/>
+   <enumeration value="before-edge"/>
+   <enumeration value="text-before-edge"/>
+   <enumeration value="middle"/>
+   <enumeration value="central"/>
+   <enumeration value="after-edge"/>
+   <enumeration value="text-after-edge"/>
+   <enumeration value="ideographic"/>
+   <enumeration value="alphabetic"/>
+   <enumeration value="hanging"/>
+   <enumeration value="mathematical"/>
+  </restriction>
+ </simpleType>
+ <simpleType name="always_Type">
+  <restriction base="NMTOKEN">
+   <enumeration value="always"/>
+  </restriction>
+ </simpleType>
+ <simpleType name="auto_Type">
+  <restriction base="NMTOKEN">
+   <enumeration value="auto"/>
+  </restriction>
+ </simpleType>
+ <simpleType name="azimuth_base_Type">
+  <restriction base="NMTOKEN">
+   <enumeration value="left-side"/>
+   <enumeration value="far-left"/>
+   <enumeration value="left"/>
+   <enumeration value="center-left"/>
+   <enumeration value="center"/>
+   <enumeration value="center-right"/>
+   <enumeration value="right"/>
+   <enumeration value="far-right"/>
+   <enumeration value="right-side"/>
+   <enumeration value="behind"/>
+   <enumeration value="leftwards"/>
+   <enumeration value="rightwards"/>
+   <enumeration value="inherit"/>
+  </restriction>
+ </simpleType>
+ <simpleType name="background_position_base_Type">
+  <restriction base="string">
+   <enumeration value="top left"/>
+   <enumeration value="top center"/>
+   <enumeration value="top right"/>
+   <enumeration value="center left"/>
+   <enumeration value="center center"/>
+   <enumeration value="center right"/>
+   <enumeration value="left bottom"/>
+   <enumeration value="bottom center"/>
+   <enumeration value="bottom right"/>
+  </restriction>
+ </simpleType>
+ <simpleType name="baseline_base_Type">
+  <restriction base="NMTOKEN">
+   <enumeration value="baseline"/>
+   <enumeration value="sub"/>
+   <enumeration value="super"/>
+  </restriction>
+ </simpleType>
+ <simpleType name="border_margin_width_Type">
+  <xs:restriction>
+   <xs:simpleType>
+    <xs:list>
+     <xs:simpleType>
+      <union memberTypes="fo:positive_length_Type fo:width_Type"/>
+     </xs:simpleType>
+    </xs:list>
+   </xs:simpleType>
+   <xs:minLength value="1"/>
+   <xs:maxLength value="4"/>
+  </xs:restriction>
+ </simpleType>
+ <simpleType name="border_side_Type">
+  <restriction base="string">
+   <pattern value="(thin|medium|thick) (none|hidden|dotted|dashed|solid|double|groove|ridge|inset|outset) ([a-z]{3,16}|#[0-9A-F]{6})"/>
+  </restriction>
+ </simpleType>
+ <simpleType name="border_top_width_Type">
+  <union memberTypes="fo:length_Type fo:inherit_Type fo:width_Type"/>
+ </simpleType>
+ <simpleType name="box_alignment_Type">
+  <restriction base="NMTOKEN">
+   <enumeration value="top"/>
+   <enumeration value="text-top"/>
+   <enumeration value="bottom"/>
+   <enumeration value="text-bottom"/>
+  </restriction>
+ </simpleType>
+ <simpleType name="force_Type">
+  <restriction base="NMTOKEN">
+   <enumeration value="force"/>
+  </restriction>
+ </simpleType>
+ <simpleType name="horizontal_position_Type">
+  <restriction base="NMTOKEN">
+   <enumeration value="left"/>
+   <enumeration value="center"/>
+   <enumeration value="right"/>
+  </restriction>
+ </simpleType>
+ <simpleType name="inherit_Type">
+  <restriction base="NMTOKEN">
+   <enumeration value="inherit"/>
+  </restriction>
+ </simpleType>
+ <simpleType name="integer_Force_Type">
+  <restriction base="string">
+   <pattern value="([0-9]+|force)"/>
+  </restriction>
+ </simpleType>
+ <simpleType name="length_percentage_Type">
+  <union memberTypes="fo:length_Type fo:percentage_Type"/>
+ </simpleType>
+ <simpleType name="margin_width_Type">
+  <union memberTypes="fo:auto_Type fo:inherit_Type fo:length_Type fo:percentage_Type"/>
+ </simpleType>
+ <simpleType name="measurement_Type">
+  <restriction base="string">
+   <enumeration value="px"/>
+   <enumeration value="pt"/>
+   <enumeration value="mm"/>
+   <enumeration value="in"/>
+   <enumeration value="cm"/>
+   <enumeration value="em"/>
+  </restriction>
+ </simpleType>
+ <simpleType name="negative_length_Type">
+  <restriction base="string">
+   <pattern value="-\d+\.?\d*(px|pt|mm|cm|in|em|%)"/>
+  </restriction>
+ </simpleType>
+ <simpleType name="no_limit_Type">
+  <restriction base="NMTOKEN">
+   <enumeration value="no-limit"/>
+  </restriction>
+ </simpleType>
+ <simpleType name="none_Type">
+  <restriction base="NMTOKEN">
+   <enumeration value="none"/>
+  </restriction>
+ </simpleType>
+ <simpleType name="normal_Type">
+  <restriction base="NMTOKEN">
+   <enumeration value="normal"/>
+  </restriction>
+ </simpleType>
+ <simpleType name="once_Type">
+  <restriction base="NMTOKEN">
+   <enumeration value="once"/>
+  </restriction>
+ </simpleType>
+ <simpleType name="orientation_Type">
+  <restriction base="NMTOKEN">
+   <enumeration value="inherit"/>
+   <enumeration value="0"/>
+   <enumeration value="90"/>
+   <enumeration value="180"/>
+   <enumeration value="270"/>
+   <enumeration value="-90"/>
+   <enumeration value="-180"/>
+   <enumeration value="-270"/>
+   <enumeration value="0deg"/>
+   <enumeration value="90deg"/>
+   <enumeration value="180deg"/>
+   <enumeration value="270deg"/>
+   <enumeration value="-90deg"/>
+   <enumeration value="-180deg"/>
+   <enumeration value="-270deg"/>
+  </restriction>
+ </simpleType>
+ <simpleType name="padding_before_Type">
+  <union memberTypes="fo:length_Type fo:inherit_Type fo:width_Type fo:length_conditional_Type"/>
+ </simpleType>
+ <simpleType name="padding_top_Type">
+  <union memberTypes="fo:length_Type fo:inherit_Type fo:width_Type"/>
+ </simpleType>
+ <simpleType name="relative_size_Type">
+  <restriction base="NMTOKEN">
+   <enumeration value="larger"/>
+   <enumeration value="smaller"/>
+  </restriction>
+ </simpleType>
+ <simpleType name="scale_to_fit_Type">
+  <restriction base="NMTOKEN">
+   <enumeration value="scale-to-fit"/>
+  </restriction>
+ </simpleType>
+ <simpleType name="size_base_Type">
+  <restriction base="string">
+   <enumeration value="auto"/>
+   <enumeration value="landscape"/>
+   <enumeration value="portrait"/>
+   <enumeration value="inherit"/>
+  </restriction>
+ </simpleType>
+ <simpleType name="space_after_maximum_Type">
+  <union memberTypes="fo:length_Type fo:inherit_Type"/>
+ </simpleType>
+ <simpleType name="space_after_minimum_Type">
+  <union memberTypes="fo:length_Type fo:inherit_Type"/>
+ </simpleType>
+ <simpleType name="space_after_optimum_Type">
+  <union memberTypes="fo:length_Type fo:inherit_Type"/>
+ </simpleType>
+ <simpleType name="space_after_precedence_Type">
+  <union memberTypes="fo:integer_Type fo:force_Type"/>
+ </simpleType>
+ <simpleType name="space_before_maximum_Type">
+  <union memberTypes="fo:length_Type fo:inherit_Type"/>
+ </simpleType>
+ <simpleType name="space_before_minimum_Type">
+  <union memberTypes="fo:length_Type fo:inherit_Type"/>
+ </simpleType>
+ <simpleType name="space_before_optimum_Type">
+  <union memberTypes="fo:length_Type fo:inherit_Type"/>
+ </simpleType>
+ <simpleType name="space_before_precedence_Type">
+  <union memberTypes="fo:integer_Type fo:force_Type"/>
+ </simpleType>
+ <simpleType name="space_end_maximum_Type">
+  <union memberTypes="fo:length_Type fo:inherit_Type"/>
+ </simpleType>
+ <simpleType name="space_end_minimum_Type">
+  <union memberTypes="fo:length_Type fo:inherit_Type"/>
+ </simpleType>
+ <simpleType name="space_end_optimum_Type">
+  <union memberTypes="fo:length_Type fo:inherit_Type"/>
+ </simpleType>
+ <simpleType name="space_end_precedence_Type">
+  <union memberTypes="fo:integer_Type fo:force_Type"/>
+ </simpleType>
+ <simpleType name="space_start_maximum_Type">
+  <union memberTypes="fo:length_Type fo:inherit_Type"/>
+ </simpleType>
+ <simpleType name="space_start_minimum_Type">
+  <union memberTypes="fo:length_Type fo:inherit_Type"/>
+ </simpleType>
+ <simpleType name="space_start_optimum_Type">
+  <union memberTypes="fo:length_Type fo:inherit_Type"/>
+ </simpleType>
+ <simpleType name="space_start_precedence_Type">
+  <union memberTypes="fo:integer_Type fo:force_Type"/>
+ </simpleType>
+ <simpleType name="speech_rate_base_Type">
+  <restriction base="NMTOKEN">
+   <enumeration value="x-slow"/>
+   <enumeration value="slow"/>
+   <enumeration value="medium"/>
+   <enumeration value="fast"/>
+   <enumeration value="x-fast"/>
+   <enumeration value="faster"/>
+   <enumeration value="slower"/>
+   <enumeration value="inherit"/>
+  </restriction>
+ </simpleType>
+ <simpleType name="transparent_Type">
+  <restriction base="NMTOKEN">
+   <enumeration value="transparent"/>
+  </restriction>
+ </simpleType>
+ <simpleType name="use_font_metrics_Type">
+  <restriction base="NMTOKEN">
+   <enumeration value="use-font-metrics"/>
+  </restriction>
+ </simpleType>
+ <simpleType name="vertical_align_base_Type">
+  <restriction base="string">
+   <enumeration value="baseline"/>
+   <enumeration value="middle"/>
+   <enumeration value="sub"/>
+   <enumeration value="super"/>
+   <enumeration value="text-top"/>
+   <enumeration value="text-bottom"/>
+   <enumeration value="top"/>
+   <enumeration value="bottom"/>
+   <enumeration value="inherit"/>
+  </restriction>
+ </simpleType>
+ <simpleType name="vertical_position_Type">
+  <restriction base="NMTOKEN">
+   <enumeration value="top"/>
+   <enumeration value="center"/>
+   <enumeration value="bottom"/>
+  </restriction>
+ </simpleType>
+ <simpleType name="width_Type">
+  <restriction base="NMTOKEN">
+   <enumeration value="thin"/>
+   <enumeration value="medium"/>
+   <enumeration value="thick"/>
+  </restriction>
+ </simpleType>
+ <attributeGroup name="absolute_or_Relative_Position_Properties_List">
+  <attributeGroup ref="fo:absolute_or_Relative_Position_Properties_List_FOP"/>
+  <attributeGroup ref="fo:absolute_or_Relative_Position_Properties_List_Not"/>
+ </attributeGroup>
+ <attributeGroup name="Absolute_Position_Properties_List">
+  <attributeGroup ref="fo:Absolute_Position_Properties_List_FOP"/>
+  <attributeGroup ref="fo:Absolute_Position_Properties_List_Not"/>
+ </attributeGroup>
+ <attributeGroup name="Accessibility_Properties_List">
+  <attributeGroup ref="fo:Accessibility_Properties_List_FOP"/>
+  <attributeGroup ref="fo:Accessibility_Properties_List_Not"/>
+ </attributeGroup>
+ <attributeGroup name="Aural_Properties_List">
+  <attributeGroup ref="fo:Aural_Properties_List_FOP"/>
+  <attributeGroup ref="fo:Aural_Properties_List_Not"/>
+ </attributeGroup>
+ <attributeGroup name="Background_Properties_List">
+  <attributeGroup ref="fo:Background_Properties_List_FOP"/>
+  <attributeGroup ref="fo:Background_Properties_List_Not"/>
+ </attributeGroup>
+ <attributeGroup name="block_hyphenation_Properties_List">
+  <attributeGroup ref="fo:block_hyphenation_Properties_List_FOP"/>
+  <attributeGroup ref="fo:block_hyphenation_Properties_List_Not"/>
+ </attributeGroup>
+ <attributeGroup name="block_properties">
+  <attributeGroup ref="fo:block_properties_FOP"/>
+  <attributeGroup ref="fo:block_properties_Not"/>
+ </attributeGroup>
+ <attributeGroup name="Border_Padding_and_Background_Properties_List">
+  <attributeGroup ref="fo:Border_Properties_List"/>
+  <attributeGroup ref="fo:Padding_Properties_List"/>
+  <attributeGroup ref="fo:Background_Properties_List"/>
+ </attributeGroup>
+ <attributeGroup name="Border_Properties_List">
+  <attribute name="border" type="fo:border_Type"/>
+  <attribute name="border-after-style" type="fo:border_style_Type"/>
+  <attribute name="border-after-width.length" type="fo:length_Type"/>
+  <attribute name="border-after-width.conditionality" type="fo:conditionality_Type"/>
+  <attribute name="border-before-style" type="fo:border_style_Type"/>
+  <attribute name="border-before-width.length" type="fo:length_Type"/>
+  <attribute name="border-before-width.conditionality" type="fo:conditionality_Type"/>
+  <attribute name="border-bottom-style" type="fo:border_style_Type"/>
+  <attribute name="border-end-style" type="fo:border_style_Type"/>
+  <attribute name="border-end-width.length" type="fo:length_Type"/>
+  <attribute name="border-end-width.conditionality" type="fo:conditionality_Type"/>
+  <attribute name="border-left-style" type="fo:border_style_Type"/>
+  <attribute name="border-right-style" type="fo:border_style_Type"/>
+  <attribute name="border-start-style" type="fo:border_style_Type"/>
+  <attribute name="border-start-width.length" type="fo:length_Type"/>
+  <attribute name="border-start-width.conditionality" type="fo:conditionality_Type"/>
+  <attribute name="border-top-style" type="fo:border_style_Type"/>
+  <attribute name="border-left-color" type="fo:color_Type"/>
+  <attribute name="border-right-color" type="fo:color_Type"/>
+  <attribute name="border-top-color" type="fo:color_Type"/>
+  <attribute name="border-bottom-color" type="fo:color_Type"/>
+  <attribute name="border-before-color" type="fo:color_Type"/>
+  <attribute name="border-after-color" type="fo:color_Type"/>
+  <attribute name="border-start-color" type="fo:color_Type"/>
+  <attribute name="border-end-color" type="fo:color_Type"/>
+  <attribute name="border-left-width" type="fo:border_top_width_Type"/>
+  <attribute name="border-right-width" type="fo:border_top_width_Type"/>
+  <attribute name="border-top-width" type="fo:border_top_width_Type"/>
+  <attribute name="border-bottom-width" type="fo:border_top_width_Type"/>
+  <attribute name="border-before-width" type="fo:border_before_width_Type"/>
+  <attribute name="border-after-width" type="fo:border_before_width_Type"/>
+  <attribute name="border-start-width" type="fo:border_before_width_Type"/>
+  <attribute name="border-end-width" type="fo:border_before_width_Type"/>
+  <attribute name="border-top-width.length" type="fo:length_Type"/>
+  <attribute name="border-top-width.conditionality" type="fo:conditionality_Type"/>
+  <attribute name="border-bottom-width.length" type="fo:length_Type"/>
+  <attribute name="border-bottom-width.conditionality" type="fo:conditionality_Type"/>
+  <attribute name="border-left-width.length" type="fo:length_Type"/>
+  <attribute name="border-left-width.conditionality" type="fo:conditionality_Type"/>
+  <attribute name="border-right-width.length" type="fo:length_Type"/>
+  <attribute name="border-right-width.conditionality" type="fo:conditionality_Type"/>
+ </attributeGroup>
+ <attributeGroup name="break_Properties_List">
+  <attributeGroup ref="fo:break_Properties_List_FOP"/>
+  <attributeGroup ref="fo:break_Properties_List_Not"/>
+ </attributeGroup>
+ <attributeGroup name="clip_Properties_List">
+  <attributeGroup ref="fo:clip_Properties_List_Not"/>
+  <attributeGroup ref="fo:clip_Properties_List_FOP"/>
+ </attributeGroup>
+ <attributeGroup name="Font_Properties_List">
+  <attributeGroup ref="fo:Font_Properties_List_Not"/>
+  <attributeGroup ref="fo:Font_Properties_List_FOP"/>
+ </attributeGroup>
+ <attributeGroup name="Hyphenation_Properties_List">
+  <attributeGroup ref="fo:Hyphenation_Properties_List_Not"/>
+  <attributeGroup ref="fo:Hyphenation_Properties_List_FOP"/>
+ </attributeGroup>
+ <attributeGroup name="inheritable_properties_List">
+  <attributeGroup ref="fo:inheritable_properties_List_Not"/>
+  <attributeGroup ref="fo:inheritable_properties_List_FOP"/>
+ </attributeGroup>
+ <attributeGroup name="intrusion_displace_Properties_List">
+  <attributeGroup ref="fo:intrusion_displace_Properties_List_Not"/>
+  <attributeGroup ref="fo:intrusion_displace_Properties_List_FOP"/>
+ </attributeGroup>
+ <attributeGroup name="keep_Properties_List">
+  <attributeGroup ref="fo:keep_Properties_List_FOP"/>
+  <attributeGroup ref="fo:keep_Properties_List_Not"/>
+ </attributeGroup>
+ <attributeGroup name="line_height_Properties_List">
+  <attributeGroup ref="fo:line_height_Properties_List_FOP"/>
+  <attributeGroup ref="fo:line_height_Properties_List_Not"/>
+ </attributeGroup>
+ <attributeGroup name="list_properties">
+  <attributeGroup ref="fo:list_properties_FOP"/>
+  <attributeGroup ref="fo:list_properties_Not"/>
+ </attributeGroup>
+ <attributeGroup name="Margin_Properties_Basic_List">
+  <attribute name="margin-top" type="fo:margin_width_Type"/>
+  <attribute name="margin-bottom" type="fo:margin_width_Type"/>
+  <attribute name="margin-left" type="fo:margin_width_Type"/>
+  <attribute name="margin-right" type="fo:margin_width_Type"/>
+ </attributeGroup>
+ <attributeGroup name="Margin_Properties_Block_List">
+  <attributeGroup ref="fo:Margin_Properties_Basic_List"/>
+  <attributeGroup ref="fo:Margin_Properties_vertical_Space_List"/>
+ </attributeGroup>
+ <attributeGroup name="Margin_Properties_Horizontal_Space_List">
+  <attributeGroup ref="fo:Margin_Properties_Horizontal_Space_List_FOP"/>
+  <attributeGroup ref="fo:Margin_Properties_Horizontal_Space_List_Not"/>
+ </attributeGroup>
+ <attributeGroup name="Margin_Properties_Inline_List">
+  <attributeGroup ref="fo:Margin_Properties_Basic_List"/>
+  <attributeGroup ref="fo:Margin_Properties_Horizontal_Space_List"/>
+ </attributeGroup>
+ <attributeGroup name="Margin_Properties_vertical_Space_List">
+  <attributeGroup ref="fo:Margin_Properties_vertical_Space_List_FOP"/>
+  <attributeGroup ref="fo:Margin_Properties_vertical_Space_List_Not"/>
+ </attributeGroup>
+ <attributeGroup name="Padding_Properties_List">
+  <attribute name="padding" type="fo:padding_before_Type"/>
+  <attribute name="padding-before" type="fo:padding_before_Type"/>
+  <attribute name="padding-before.length" type="fo:length_Type"/>
+  <attribute name="padding-before.conditionality" type="fo:conditionality_Type"/>
+  <attribute name="padding-after" type="fo:padding_before_Type"/>
+  <attribute name="padding-after.length" type="fo:length_Type"/>
+  <attribute name="padding-after.conditionality" type="fo:conditionality_Type"/>
+  <attribute name="padding-start" type="fo:padding_before_Type"/>
+  <attribute name="padding-start.length" type="fo:length_Type"/>
+  <attribute name="padding-start.conditionality" type="fo:conditionality_Type"/>
+  <attribute name="padding-end" type="fo:padding_before_Type"/>
+  <attribute name="padding-end.length" type="fo:length_Type"/>
+  <attribute name="padding-end.conditionality" type="fo:conditionality_Type"/>
+  <attribute name="padding-top" type="fo:padding_top_Type"/>
+  <attribute name="padding-top.length" type="fo:length_Type"/>
+  <attribute name="padding-top.conditionality" type="fo:conditionality_Type"/>
+  <attribute name="padding-bottom" type="fo:padding_top_Type"/>
+  <attribute name="padding-bottom.length" type="fo:length_Type"/>
+  <attribute name="padding-bottom.conditionality" type="fo:conditionality_Type"/>
+  <attribute name="padding-left" type="fo:padding_top_Type"/>
+  <attribute name="padding-left.length" type="fo:length_Type"/>
+  <attribute name="padding-left.conditionality" type="fo:conditionality_Type"/>
+  <attribute name="padding-right" type="fo:padding_top_Type"/>
+  <attribute name="padding-right.length" type="fo:length_Type"/>
+  <attribute name="padding-right.conditionality" type="fo:conditionality_Type"/>
+ </attributeGroup>
+ <attributeGroup name="progression_Properties_List">
+  <attributeGroup ref="fo:progression_Properties_List_FOP"/>
+  <attributeGroup ref="fo:progression_Properties_List_Not"/>
+ </attributeGroup>
+ <attributeGroup name="reference_Properties_List">
+  <attributeGroup ref="fo:reference_Properties_List_FOP"/>
+  <attributeGroup ref="fo:reference_Properties_List_Not"/>
+ </attributeGroup>
+ <attributeGroup name="Relative_Position_Properties_List">
+  <attributeGroup ref="fo:Relative_Position_Properties_List_FOP"/>
+  <attributeGroup ref="fo:Relative_Position_Properties_List_Not"/>
+ </attributeGroup>
+ <attributeGroup name="text_one_Properties_List">
+  <attributeGroup ref="fo:text_one_Properties_List_FOP"/>
+  <attributeGroup ref="fo:text_one_Properties_List_Not"/>
+ </attributeGroup>
+ <attributeGroup name="absolute_or_Relative_Position_Properties_List_FOP">
+  <attributeGroup ref="fo:Relative_Position_Properties_List"/>
+ </attributeGroup>
+ <attributeGroup name="Absolute_Position_Properties_List_FOP">
+  <attribute name="top" type="fo:top_Type"/>
+  <attribute name="right" type="fo:right_Type"/>
+  <attribute name="bottom" type="fo:bottom_Type"/>
+  <attribute name="left" type="fo:left_Type"/>
+ </attributeGroup>
+ <attributeGroup name="Accessibility_Properties_List_FOP"/>
+ <attributeGroup name="Aural_Properties_List_FOP"/>
+ <attributeGroup name="Background_Properties_List_FOP">
+  <attribute name="background-color" type="fo:background_color_Type"/>
+ </attributeGroup>
+ <attributeGroup name="block_hyphenation_Properties_List_FOP"/>
+ <attributeGroup name="block_properties_FOP"/>
+ <attributeGroup name="break_Properties_List_FOP">
+  <attribute name="break-after" type="fo:breaks_Type"/>
+  <attribute name="break-before" type="fo:breaks_Type"/>
+ </attributeGroup>
+ <attributeGroup name="clip_Properties_List_FOP"/>
+ <attributeGroup name="Font_Properties_List_FOP"/>
+ <attributeGroup name="Hyphenation_Properties_List_FOP"/>
+ <attributeGroup name="inheritable_properties_List_FOP">
+  <attribute name="border-bottom" type="fo:border_side_Type"/>
+  <attribute name="border-collapse" type="fo:border_collapse_Type"/>
+  <attribute name="border-color" type="fo:border_color_Type"/>
+  <attribute name="border-left" type="fo:border_side_Type"/>
+  <attribute name="border-right" type="fo:border_side_Type"/>
+  <attribute name="border-separation" type="fo:length_bp_ip_direction_Type"/>
+  <attribute name="border-style" type="fo:border_multi_style_Type"/>
+  <attribute name="border-top" type="fo:border_side_Type"/>
+  <attribute name="border-width" type="fo:border_margin_width_Type"/>
+  <attribute name="color" type="fo:color_Type"/>
+  <attribute name="country" type="fo:country_Type"/>
+  <attribute name="display-align" type="fo:display_align_Type"/>
+  <attribute name="end-indent" type="fo:end_indent_Type"/>
+  <attribute name="font-family" type="fo:family_name_Type"/>
+  <attribute name="font-size" type="fo:font_size_Type"/>
+  <attribute name="font-style" type="fo:font_style_Type"/>
+  <attribute name="font-weight" type="fo:font_weight_Type"/>
+  <attribute name="hyphenate" type="fo:hyphenate_Type"/>
+  <attribute name="hyphenation-character" type="fo:hyphenation_character_Type"/>
+  <attribute name="hyphenation-push-character-count" type="fo:integer_Type"/>
+  <attribute name="hyphenation-remain-character-count" type="fo:integer_Type"/>
+  <attribute name="keep-together" type="fo:keep_compound_Type"/>
+  <attribute name="keep-together.within-column" type="fo:keep_integer_Type"/>
+  <attribute name="keep-together.within-line" type="fo:keep_integer_Type"/>
+  <attribute name="keep-together.within-page" type="fo:keep_integer_Type"/>
+  <attribute name="language" type="fo:language_Type"/>
+  <attribute name="leader-alignment" type="fo:leader_alignment_Type"/>
+  <attribute name="leader-length" type="fo:leader_length_Type"/>
+  <attribute name="leader-length.maximum" type="fo:length_Type"/>
+  <attribute name="leader-length.minimum" type="fo:length_Type"/>
+  <attribute name="leader-length.optimum" type="fo:length_Type"/>
+  <attribute name="leader-pattern" type="fo:leader_pattern_Type"/>
+  <attribute name="leader-pattern-width" type="fo:leader_pattern_width_Type"/>
+  <attribute name="letter-spacing" type="fo:letter_spacing_Type"/>
+  <attribute name="line-height" type="fo:line_height_Type"/>
+  <attribute name="orphans" type="fo:orphans_Type"/>
+  <attribute name="position" type="fo:position_Type"/>
+  <attribute name="provisional-distance-between-starts" type="fo:provisional_distance_between_starts_Type"/>
+  <attribute name="provisional-label-separation" type="fo:provisional_label_separation_Type"/>
+  <attribute name="relative-align" type="fo:relative_align_Type"/>
+  <attribute name="rule-style" type="fo:rule_style_Type"/>
+  <attribute name="rule-thickness" type="fo:length_Type"/>
+  <attribute name="start-indent" type="fo:start_indent_Type"/>
+  <attribute name="text-align" type="fo:text_align_Type"/>
+  <attribute name="text-align-last" type="fo:text_align_last_Type"/>
+  <attribute name="text-indent" type="fo:length_percentage_Type"/>
+  <attribute name="white-space-collapse" type="fo:white_space_collapse_Type"/>
+  <attribute name="widows" type="fo:widows_Type"/>
+  <attribute name="wrap-option" type="fo:wrap_option_Type"/>
+ </attributeGroup>
+ <attributeGroup name="intrusion_displace_Properties_List_FOP"/>
+ <attributeGroup name="keep_Properties_List_FOP">
+  <attribute name="keep-with-next" type="fo:keep_integer_Type"/>
+ </attributeGroup>
+ <attributeGroup name="line_height_Properties_List_FOP"/>
+ <attributeGroup name="list_properties_FOP"/>
+ <attributeGroup name="Margin_Properties_Horizontal_Space_List_FOP"/>
+ <attributeGroup name="Margin_Properties_vertical_Space_List_FOP">
+  <attribute name="space-before.optimum" type="fo:space_before_optimum_Type"/>
+  <attribute name="space-after.optimum" type="fo:space_after_optimum_Type"/>
+ </attributeGroup>
+ <attributeGroup name="progression_Properties_List_FOP"/>
+ <attributeGroup name="reference_Properties_List_FOP"/>
+ <attributeGroup name="Relative_Position_Properties_List_FOP">
+  <attribute name="top" type="fo:top_Type"/>
+  <attribute name="right" type="fo:right_Type"/>
+  <attribute name="bottom" type="fo:bottom_Type"/>
+  <attribute name="left" type="fo:left_Type"/>
+ </attributeGroup>
+ <attributeGroup name="text_one_Properties_List_FOP"/>
+ <attributeGroup name="absolute_or_Relative_Position_Properties_List_Not">
+  <attribute name="absolute-position" type="fo:absolute_position_Type"/>
+ </attributeGroup>
+ <attributeGroup name="Absolute_Position_Properties_List_Not">
+  <attribute name="absolute-position" type="fo:absolute_position_Type"/>
+ </attributeGroup>
+ <attributeGroup name="Accessibility_Properties_List_Not">
+  <attribute name="source-document" type="xs:string"/>
+  <attribute name="role" type="xs:string"/>
+ </attributeGroup>
+ <attributeGroup name="Aural_Properties_List_Not">
+  <attribute name="azimuth" type="fo:azimuth_Type"/>
+  <attribute name="cue" type="xs:string"/>
+  <attribute name="cue-after" type="xs:string"/>
+  <attribute name="cue-before" type="xs:string"/>
+  <attribute name="elevation" type="fo:elevation_Type"/>
+  <attribute name="pause" type="xs:string"/>
+  <attribute name="pause-after" type="xs:string"/>
+  <attribute name="pause-before" type="xs:string"/>
+  <attribute name="pitch" type="xs:string"/>
+  <attribute name="pitch-range" type="xs:string"/>
+  <attribute name="play-during" type="xs:string"/>
+  <attribute name="richness" type="xs:string"/>
+  <attribute name="speak" type="xs:string"/>
+  <attribute name="speak-header" type="xs:string"/>
+  <attribute name="speak-numeral" type="fo:speak_numeral_Type"/>
+  <attribute name="speak-punctuation" type="xs:string"/>
+  <attribute name="speech-rate" type="fo:speech_rate_Type"/>
+  <attribute name="stress" type="xs:string"/>
+  <attribute name="voice-family" type="xs:string"/>
+  <attribute name="volume" type="xs:string"/>
+ </attributeGroup>
+ <attributeGroup name="Background_Properties_List_Not">
+  <attribute name="background-attachment" type="fo:background_attachment_Type"/>
+  <attribute name="background-image" type="xs:string"/>
+  <attribute name="background-repeat" type="fo:background_repeat_Type"/>
+  <attribute name="background-position-horizontal" type="fo:background_position_horizontal_Type"/>
+  <attribute name="background-position-vertical" type="fo:background_position_vertical_Type"/>
+ </attributeGroup>
+ <attributeGroup name="block_hyphenation_Properties_List_Not"/>
+ <attributeGroup name="block_properties_Not">
+  <attribute name="page-break-after" type="fo:page_break_after_Type"/>
+  <attribute name="page-break-before" type="fo:page_break_after_Type"/>
+ </attributeGroup>
+ <attributeGroup name="break_Properties_List_Not"/>
+ <attributeGroup name="clip_Properties_List_Not">
+  <attribute name="clip" type="fo:clip_Type"/>
+ </attributeGroup>
+ <attributeGroup name="Font_Properties_List_Not"/>
+ <attributeGroup name="Hyphenation_Properties_List_Not"/>
+ <attributeGroup name="inheritable_properties_List_Not">
+  <attribute name="auto-restore" type="fo:auto_restore_Type"/>
+  <attribute name="background" type="fo:background_Type"/>
+  <attribute name="border-spacing" type="fo:length_Type"/>
+  <attribute name="caption-side" type="fo:caption_side_Type"/>
+  <attribute name="direction" type="fo:direction_Type"/>
+  <attribute name="empty-cells" type="fo:empty_cells_Type"/>
+  <attribute name="font" type="xs:string"/>
+  <attribute name="font-selection-strategy" type="fo:font_selection_strategy_Type"/>
+  <attribute name="font-size-adjust" type="fo:font_size_adjust_Type"/>
+  <attribute name="font-stretch" type="xs:string"/>
+  <attribute name="font-variant" type="fo:font_variant_Type"/>
+  <attribute name="glyph-orientation-vertical" type="fo:orientation_Type"/>
+  <attribute name="glyph-orientation-horizontal" type="fo:orientation_Type"/>
+  <attribute name="hyphenation-keep" type="fo:hyphenation_keep_Type"/>
+  <attribute name="hyphenation-ladder-count" type="fo:hyphenation_ladder_count_Type"/>
+  <attribute name="intrusion-displace" type="fo:displace_Type"/>
+  <attribute name="last-line-end-indent" type="fo:last_line_end_indent_Type"/>
+  <attribute name="line-height-shift-adjustment" type="fo:line_height_shift_adjustment_Type"/>
+  <attribute name="line-stacking-strategy" type="fo:line_stacking_strategy_Type"/>
+  <attribute name="linefeed-treatment" type="fo:linefeed_treatment_Type"/>
+  <attribute name="margin" type="fo:border_margin_width_Type"/>
+  <attribute name="max-width" type="fo:max_width_Type"/>
+  <attribute name="min-height" type="fo:start_indent_Type"/>
+  <attribute name="min-width" type="fo:start_indent_Type"/>
+  <attribute name="page-break-inside" type="fo:page_break_inside_Type"/>
+  <attribute name="reference-orientation" type="fo:orientation_Type"/>
+  <attribute name="score-spaces" type="fo:score_spaces_Type"/>
+  <attribute name="script" type="xs:string"/>
+  <attribute name="text-transform" type="fo:text_transform_Type"/>
+  <attribute name="visibility" type="fo:visibility_Type"/>
+  <attribute name="white-space" type="fo:white_space_Type"/>
+  <attribute name="white-space-treatment" type="fo:white_space_treatment_Type"/>
+  <attribute name="word-spacing" type="fo:letter_spacing_Type"/>
+  <attribute name="writing-mode" type="fo:writing_mode_Type"/>
+ </attributeGroup>
+ <attributeGroup name="intrusion_displace_Properties_List_Not"/>
+ <attributeGroup name="keep_Properties_List_Not">
+  <attribute name="keep-with-previous" type="fo:keep_integer_Type"/>
+ </attributeGroup>
+ <attributeGroup name="line_height_Properties_List_Not"/>
+ <attributeGroup name="list_properties_Not">
+  <attribute name="page-break-after" type="fo:page_break_after_Type"/>
+  <attribute name="page-break-before" type="fo:page_break_after_Type"/>
+  <attribute name="background-position" type="fo:background_position_Type"/>
+ </attributeGroup>
+ <attributeGroup name="Margin_Properties_Horizontal_Space_List_Not">
+  <attribute name="space-start" type="fo:space_start_Type"/>
+  <attribute name="space-start.minimum" type="fo:length_Type"/>
+  <attribute name="space-start.optimum" type="fo:length_Type"/>
+  <attribute name="space-start.maximum" type="fo:length_Type"/>
+  <attribute name="space-start.conditionality" type="fo:conditionality_Type"/>
+  <attribute name="space-start.precedence" type="fo:integer_Force_Type"/>
+  <attribute name="space-end" type="fo:space_start_Type"/>
+  <attribute name="space-end.minimum" type="fo:length_Type"/>
+  <attribute name="space-end.optimum" type="fo:length_Type"/>
+  <attribute name="space-end.maximum" type="fo:length_Type"/>
+  <attribute name="space-end.conditionality" type="fo:conditionality_Type"/>
+  <attribute name="space-end.precedence" type="fo:integer_Force_Type"/>
+ </attributeGroup>
+ <attributeGroup name="Margin_Properties_vertical_Space_List_Not">
+  <attribute name="space-before" type="fo:space_Type"/>
+  <attribute name="space-before.minimum" type="fo:length_Type"/>
+  <attribute name="space-before.maximum" type="fo:length_Type"/>
+  <attribute name="space-before.conditionality" type="fo:conditionality_Type"/>
+  <attribute name="space-before.precedence" type="fo:integer_Force_Type"/>
+  <attribute name="space-after" type="fo:space_Type"/>
+  <attribute name="space-after.minimum" type="fo:length_Type"/>
+  <attribute name="space-after.maximum" type="fo:length_Type"/>
+  <attribute name="space-after.conditionality" type="fo:conditionality_Type"/>
+  <attribute name="space-after.precedence" type="fo:integer_Force_Type"/>
+ </attributeGroup>
+ <attributeGroup name="progression_Properties_List_Not">
+  <attribute name="block-progression-dimension" type="fo:margin_width_Type"/>
+  <attribute name="block-progression-dimension.minimum" type="fo:length_Type"/>
+  <attribute name="block-progression-dimension.optimum" type="fo:block_progression_dimension_optimum_Type"/>
+  <attribute name="block-progression-dimension.maximum" type="fo:block_progression_dimension_maximum_Type"/>
+  <attribute name="inline-progression-dimension" type="fo:margin_width_Type"/>
+  <attribute name="inline-progression-dimension.minimum" type="fo:length_Type"/>
+  <attribute name="inline-progression-dimension.optimum" type="fo:block_progression_dimension_optimum_Type"/>
+  <attribute name="inline-progression-dimension.maximum" type="fo:block_progression_dimension_maximum_Type"/>
+ </attributeGroup>
+ <attributeGroup name="reference_Properties_List_Not"/>
+ <attributeGroup name="Relative_Position_Properties_List_Not">
+  <attribute name="relative-position" type="fo:relative_position_Type"/>
+ </attributeGroup>
+ <attributeGroup name="text_one_Properties_List_Not">
+  <attribute name="text-depth" type="fo:text_depth_Type"/>
+  <attribute name="text-altitude" type="fo:text_altitude_Type"/>
+ </attributeGroup>
+ <simpleType name="absolute_position_Type">
+  <restriction base="NMTOKEN">
+   <enumeration value="auto"/>
+   <enumeration value="absolute"/>
+   <enumeration value="fixed"/>
+   <enumeration value="inherit"/>
+  </restriction>
+ </simpleType>
+ <simpleType name="active_state_Type">
+  <restriction base="NMTOKEN">
+   <enumeration value="link"/>
+   <enumeration value="visited"/>
+   <enumeration value="active"/>
+   <enumeration value="hover"/>
+   <enumeration value="focus"/>
+  </restriction>
+ </simpleType>
+ <simpleType name="alignment_adjust_Type">
+  <union memberTypes="fo:auto_Type fo:inherit_Type fo:alignment_Type fo:percentage_Type fo:length_Type"/>
+ </simpleType>
+ <simpleType name="alignment_baseline_Type">
+  <union memberTypes="fo:auto_Type fo:inherit_Type fo:alignment_Type fo:box_alignment_Type"/>
+ </simpleType>
+ <simpleType name="auto_restore_Type">
+  <restriction base="NMTOKEN">
+   <enumeration value="true"/>
+   <enumeration value="false"/>
+  </restriction>
+ </simpleType>
+ <simpleType name="azimuth_Type">
+  <union memberTypes="fo:azimuth_base_Type fo:angle_Type"/>
+ </simpleType>
+ <simpleType name="background_attachment_Type">
+  <restriction base="NMTOKEN">
+   <enumeration value="scroll"/>
+   <enumeration value="fixed"/>
+   <enumeration value="inherit"/>
+  </restriction>
+ </simpleType>
+ <simpleType name="background_color_Type">
+  <union memberTypes="fo:inherit_Type fo:transparent_Type fo:color_Hex_Type fo:color_Name_Type"/>
+ </simpleType>
+ <simpleType name="background_image_Type">
+  <restriction base="NMTOKEN">
+   <enumeration value="inherit"/>
+   <enumeration value="none"/>
+   <enumeration value="uri-specification"/>
+  </restriction>
+ </simpleType>
+ <simpleType name="background_position_horizontal_Type">
+  <union memberTypes="fo:horizontal_position_Type fo:inherit_Type fo:percentage_Type fo:length_Type"/>
+ </simpleType>
+ <simpleType name="background_position_Type">
+  <union memberTypes="fo:background_position_base_Type fo:inherit_Type fo:background_position_percentage_Type fo:background_position_length_Type"/>
+ </simpleType>
+ <simpleType name="background_position_vertical_Type">
+  <union memberTypes="fo:vertical_position_Type fo:inherit_Type fo:percentage_Type fo:length_Type"/>
+ </simpleType>
+ <simpleType name="background_repeat_Type">
+  <restriction base="NMTOKEN">
+   <enumeration value="repeat"/>
+   <enumeration value="repeat-x"/>
+   <enumeration value="repeat-y"/>
+   <enumeration value="no-repeat"/>
+   <enumeration value="inherit"/>
+  </restriction>
+ </simpleType>
+ <simpleType name="background_Type">
+  <union memberTypes="fo:background_color_Type fo:background_image_Type fo:background_repeat_Type fo:background_attachment_Type fo:background_position_Type"/>
+ </simpleType>
+ <simpleType name="baseline_shift_Type">
+  <union memberTypes="fo:baseline_base_Type fo:inherit_Type fo:percentage_Type fo:length_Type"/>
+ </simpleType>
+ <simpleType name="blank_or_not_blank_Type">
+  <restriction base="NMTOKEN">
+   <enumeration value="blank"/>
+   <enumeration value="not-blank"/>
+   <enumeration value="any"/>
+   <enumeration value="inherit"/>
+  </restriction>
+ </simpleType>
+ <simpleType name="block_progression_dimension_maximum_Type">
+  <union memberTypes="fo:auto_Type fo:length_Type"/>
+ </simpleType>
+ <simpleType name="block_progression_dimension_optimum_Type">
+  <union memberTypes="fo:auto_Type fo:length_Type"/>
+ </simpleType>
+ <simpleType name="border_collapse_Type">
+  <restriction base="NMTOKEN">
+   <enumeration value="collapse"/>
+   <enumeration value="separate"/>
+   <enumeration value="inherit"/>
+  </restriction>
+ </simpleType>
+ <simpleType name="border_color_Type">
+  <xs:restriction>
+   <xs:simpleType>
+    <xs:list>
+     <xs:simpleType>
+      <xs:restriction base="fo:color_Type"/>
+     </xs:simpleType>
+    </xs:list>
+   </xs:simpleType>
+   <xs:minLength value="1"/>
+   <xs:maxLength value="4"/>
+  </xs:restriction>
+ </simpleType>
+ <simpleType name="border_multi_style_Type">
+  <xs:restriction>
+   <xs:simpleType>
+    <xs:list>
+     <xs:simpleType>
+      <xs:restriction base="fo:border_style_Type"/>
+     </xs:simpleType>
+    </xs:list>
+   </xs:simpleType>
+   <xs:minLength value="1"/>
+   <xs:maxLength value="4"/>
+  </xs:restriction>
+ </simpleType>
+ <simpleType name="border_before_width_Type">
+  <union memberTypes="fo:length_Type fo:length_conditional_Type fo:inherit_Type fo:width_Type"/>
+ </simpleType>
+ <simpleType name="border_style_Type">
+  <restriction base="NMTOKEN">
+   <enumeration value="inherit"/>
+   <enumeration value="none"/>
+   <enumeration value="hidden"/>
+   <enumeration value="dotted"/>
+   <enumeration value="dashed"/>
+   <enumeration value="solid"/>
+   <enumeration value="double"/>
+   <enumeration value="groove"/>
+   <enumeration value="ridge"/>
+   <enumeration value="inset"/>
+   <enumeration value="outset"/>
+  </restriction>
+ </simpleType>
+ <simpleType name="border_Type">
+  <restriction base="string">
+   <pattern value="(none|hidden|dotted|dashed|solid|double|groove|ridge|inset|outset) \+?\d+\.?\d*(px|pt|mm|cm|in|em|%) (#[0-9A-F]{6}|[a-z]{3,16})"/>
+  </restriction>
+ </simpleType>
+ <simpleType name="border_width_Type">
+  <union memberTypes="fo:inherit_type"/>
+ </simpleType>
+ <simpleType name="bottom_Type">
+  <union memberTypes="fo:auto_Type fo:inherit_Type fo:length_Type fo:percentage_Type"/>
+ </simpleType>
+ <simpleType name="breaks_Type">
+  <restriction base="NMTOKEN">
+   <enumeration value="auto"/>
+   <enumeration value="column"/>
+   <enumeration value="page"/>
+   <enumeration value="even-page"/>
+   <enumeration value="odd-page"/>
+   <enumeration value="inherit"/>
+  </restriction>
+ </simpleType>
+ <simpleType name="caption_side_Type">
+  <restriction base="NMTOKEN">
+   <enumeration value="before"/>
+   <enumeration value="after"/>
+   <enumeration value="start"/>
+   <enumeration value="end"/>
+   <enumeration value="top"/>
+   <enumeration value="bottom"/>
+   <enumeration value="left"/>
+   <enumeration value="right"/>
+   <enumeration value="inherit"/>
+  </restriction>
+ </simpleType>
+ <simpleType name="character_Type">
+  <restriction base="string">
+   <pattern value="."/>
+  </restriction>
+ </simpleType>
+ <simpleType name="clear_Type">
+  <restriction base="NMTOKEN">
+   <enumeration value="start"/>
+   <enumeration value="end"/>
+   <enumeration value="left"/>
+   <enumeration value="right"/>
+   <enumeration value="none"/>
+   <enumeration value="inherit"/>
+   <enumeration value="both"/>
+  </restriction>
+ </simpleType>
+ <simpleType name="clip_Type">
+  <restriction base="string">
+   <pattern value="(rect\((\+?\d+\.?\d*(px|pt|mm|cm|in|em|%)|auto),(\+?\d+\.?\d*(px|pt|mm|cm|in|em|%)|auto),(\+?\d+\.?\d*(px|pt|mm|cm|in|em|%)|auto),(\+?\d+\.?\d*(px|pt|mm|cm|in|em|%)|auto)\)|auto|inherit)"/>
+  </restriction>
+ </simpleType>
+ <simpleType name="color_Type">
+  <union memberTypes="fo:inherit_Type fo:color_Hex_Type fo:color_Name_Type"/>
+ </simpleType>
+ <simpleType name="column_width_Type">
+  <union memberTypes="fo:proportional_column_width_Type fo:length_percentage_Type"/>
+ </simpleType>
+ <simpleType name="content_height_Type">
+  <union memberTypes="fo:auto_Type fo:inherit_Type fo:scale_to_fit_Type fo:length_Type fo:percentage_Type"/>
+ </simpleType>
+ <simpleType name="country_Type">
+  <restriction base="NMTOKEN">
+   <enumeration value="AF"/>
+   <enumeration value="AL"/>
+   <enumeration value="DZ"/>
+   <enumeration value="AS"/>
+   <enumeration value="AD"/>
+   <enumeration value="AO"/>
+   <enumeration value="AI"/>
+   <enumeration value="AQ"/>
+   <enumeration value="AG"/>
+   <enumeration value="AR"/>
+   <enumeration value="AM"/>
+   <enumeration value="AW"/>
+   <enumeration value="AU"/>
+   <enumeration value="AT"/>
+   <enumeration value="AZ"/>
+   <enumeration value="BS"/>
+   <enumeration value="BH"/>
+   <enumeration value="BD"/>
+   <enumeration value="BB"/>
+   <enumeration value="BY"/>
+   <enumeration value="BE"/>
+   <enumeration value="BZ"/>
+   <enumeration value="BJ"/>
+   <enumeration value="BM"/>
+   <enumeration value="BT"/>
+   <enumeration value="BO"/>
+   <enumeration value="BA"/>
+   <enumeration value="BW"/>
+   <enumeration value="BV"/>
+   <enumeration value="BR"/>
+   <enumeration value="IO"/>
+   <enumeration value="BN"/>
+   <enumeration value="BG"/>
+   <enumeration value="BF"/>
+   <enumeration value="BI"/>
+   <enumeration value="KH"/>
+   <enumeration value="CM"/>
+   <enumeration value="CA"/>
+   <enumeration value="CV"/>
+   <enumeration value="KY"/>
+   <enumeration value="CF"/>
+   <enumeration value="TD"/>
+   <enumeration value="CL"/>
+   <enumeration value="CN"/>
+   <enumeration value="CX"/>
+   <enumeration value="CC"/>
+   <enumeration value="CO"/>
+   <enumeration value="KM"/>
+   <enumeration value="CG"/>
+   <enumeration value="CD"/>
+   <enumeration value="CK"/>
+   <enumeration value="CR"/>
+   <enumeration value="CI"/>
+   <enumeration value="HR"/>
+   <enumeration value="CU"/>
+   <enumeration value="CY"/>
+   <enumeration value="CZ"/>
+   <enumeration value="DK"/>
+   <enumeration value="DJ"/>
+   <enumeration value="DM"/>
+   <enumeration value="DO"/>
+   <enumeration value="TP"/>
+   <enumeration value="EC"/>
+   <enumeration value="EG"/>
+   <enumeration value="SV"/>
+   <enumeration value="GQ"/>
+   <enumeration value="ER"/>
+   <enumeration value="EE"/>
+   <enumeration value="ET"/>
+   <enumeration value="FK"/>
+   <enumeration value="FO"/>
+   <enumeration value="FJ"/>
+   <enumeration value="FI"/>
+   <enumeration value="FR"/>
+   <enumeration value="GF"/>
+   <enumeration value="PF"/>
+   <enumeration value="TF"/>
+   <enumeration value="GA"/>
+   <enumeration value="GM"/>
+   <enumeration value="GE"/>
+   <enumeration value="DE"/>
+   <enumeration value="GH"/>
+   <enumeration value="GI"/>
+   <enumeration value="GR"/>
+   <enumeration value="GL"/>
+   <enumeration value="GD"/>
+   <enumeration value="GP"/>
+   <enumeration value="GU"/>
+   <enumeration value="GT"/>
+   <enumeration value="GN"/>
+   <enumeration value="GW"/>
+   <enumeration value="GY"/>
+   <enumeration value="HT"/>
+   <enumeration value="HM"/>
+   <enumeration value="VA"/>
+   <enumeration value="HN"/>
+   <enumeration value="HK"/>
+   <enumeration value="HU"/>
+   <enumeration value="IS"/>
+   <enumeration value="IN"/>
+   <enumeration value="ID"/>
+   <enumeration value="IR"/>
+   <enumeration value="IQ"/>
+   <enumeration value="IE"/>
+   <enumeration value="IL"/>
+   <enumeration value="IT"/>
+   <enumeration value="JM"/>
+   <enumeration value="JP"/>
+   <enumeration value="JO"/>
+   <enumeration value="KZ"/>
+   <enumeration value="KE"/>
+   <enumeration value="KI"/>
+   <enumeration value="KP"/>
+   <enumeration value="KR"/>
+   <enumeration value="KW"/>
+   <enumeration value="KG"/>
+   <enumeration value="LA"/>
+   <enumeration value="LV"/>
+   <enumeration value="LB"/>
+   <enumeration value="LS"/>
+   <enumeration value="LR"/>
+   <enumeration value="LY"/>
+   <enumeration value="LI"/>
+   <enumeration value="LT"/>
+   <enumeration value="LU"/>
+   <enumeration value="MO"/>
+   <enumeration value="MK"/>
+   <enumeration value="MG"/>
+   <enumeration value="MW"/>
+   <enumeration value="MY"/>
+   <enumeration value="MV"/>
+   <enumeration value="ML"/>
+   <enumeration value="MT"/>
+   <enumeration value="MH"/>
+   <enumeration value="MQ"/>
+   <enumeration value="MR"/>
+   <enumeration value="MU"/>
+   <enumeration value="YT"/>
+   <enumeration value="MX"/>
+   <enumeration value="FM"/>
+   <enumeration value="MD"/>
+   <enumeration value="MC"/>
+   <enumeration value="MN"/>
+   <enumeration value="MS"/>
+   <enumeration value="MA"/>
+   <enumeration value="MZ"/>
+   <enumeration value="MM"/>
+   <enumeration value="NA"/>
+   <enumeration value="NR"/>
+   <enumeration value="NP"/>
+   <enumeration value="NL"/>
+   <enumeration value="AN"/>
+   <enumeration value="NC"/>
+   <enumeration value="NZ"/>
+   <enumeration value="NI"/>
+   <enumeration value="NE"/>
+   <enumeration value="NG"/>
+   <enumeration value="NU"/>
+   <enumeration value="NF"/>
+   <enumeration value="MP"/>
+   <enumeration value="NO"/>
+   <enumeration value="OM"/>
+   <enumeration value="PK"/>
+   <enumeration value="PW"/>
+   <enumeration value="PS"/>
+   <enumeration value="PA"/>
+   <enumeration value="PG"/>
+   <enumeration value="PY"/>
+   <enumeration value="PE"/>
+   <enumeration value="PH"/>
+   <enumeration value="PN"/>
+   <enumeration value="PL"/>
+   <enumeration value="PT"/>
+   <enumeration value="PR"/>
+   <enumeration value="QA"/>
+   <enumeration value="RE"/>
+   <enumeration value="RO"/>
+   <enumeration value="RU"/>
+   <enumeration value="RW"/>
+   <enumeration value="SH"/>
+   <enumeration value="KN"/>
+   <enumeration value="LC"/>
+   <enumeration value="PM"/>
+   <enumeration value="VC"/>
+   <enumeration value="WS"/>
+   <enumeration value="SM"/>
+   <enumeration value="ST"/>
+   <enumeration value="SA"/>
+   <enumeration value="SN"/>
+   <enumeration value="SC"/>
+   <enumeration value="SL"/>
+   <enumeration value="SG"/>
+   <enumeration value="SK"/>
+   <enumeration value="SI"/>
+   <enumeration value="SB"/>
+   <enumeration value="SO"/>
+   <enumeration value="ZA"/>
+   <enumeration value="GS"/>
+   <enumeration value="ES"/>
+   <enumeration value="LK"/>
+   <enumeration value="SD"/>
+   <enumeration value="SR"/>
+   <enumeration value="SJ"/>
+   <enumeration value="SZ"/>
+   <enumeration value="SE"/>
+   <enumeration value="CH"/>
+   <enumeration value="SY"/>
+   <enumeration value="TW"/>
+   <enumeration value="TJ"/>
+   <enumeration value="TZ"/>
+   <enumeration value="TH"/>
+   <enumeration value="TG"/>
+   <enumeration value="TK"/>
+   <enumeration value="TO"/>
+   <enumeration value="TT"/>
+   <enumeration value="TN"/>
+   <enumeration value="TR"/>
+   <enumeration value="TM"/>
+   <enumeration value="TC"/>
+   <enumeration value="TV"/>
+   <enumeration value="UG"/>
+   <enumeration value="UA"/>
+   <enumeration value="AE"/>
+   <enumeration value="GB"/>
+   <enumeration value="US"/>
+   <enumeration value="UM"/>
+   <enumeration value="UY"/>
+   <enumeration value="UZ"/>
+   <enumeration value="VU"/>
+   <enumeration value="VE"/>
+   <enumeration value="VN"/>
+   <enumeration value="VG"/>
+   <enumeration value="VI"/>
+   <enumeration value="WF"/>
+   <enumeration value="EH"/>
+   <enumeration value="YE"/>
+   <enumeration value="YU"/>
+   <enumeration value="ZM"/>
+   <enumeration value="ZW"/>
+   <enumeration value="none"/>
+   <enumeration value="inherit"/>
+  </restriction>
+ </simpleType>
+ <simpleType name="direction_Type">
+  <restriction base="NMTOKEN">
+   <enumeration value="ltr"/>
+   <enumeration value="rtl"/>
+   <enumeration value="inherit"/>
+  </restriction>
+ </simpleType>
+ <simpleType name="display_align_Type">
+  <restriction base="NMTOKEN">
+   <enumeration value="auto"/>
+   <enumeration value="before"/>
+   <enumeration value="center"/>
+   <enumeration value="after"/>
+   <enumeration value="inherit"/>
+  </restriction>
+ </simpleType>
+ <simpleType name="dominant_baseline_Type">
+  <restriction base="NMTOKEN">
+   <enumeration value="auto"/>
+   <enumeration value="use-script"/>
+   <enumeration value="no-change"/>
+   <enumeration value="reset-size"/>
+   <enumeration value="ideographic"/>
+   <enumeration value="alphabetic"/>
+   <enumeration value="hanging"/>
+   <enumeration value="mathematical"/>
+   <enumeration value="inherit"/>
+  </restriction>
+ </simpleType>
+ <simpleType name="elevation_Type">
+  <restriction base="NMTOKEN">
+   <enumeration value="below"/>
+   <enumeration value="level"/>
+   <enumeration value="above"/>
+   <enumeration value="higher"/>
+   <enumeration value="lower"/>
+   <enumeration value="0"/>
+   <enumeration value="90"/>
+   <enumeration value="180"/>
+   <enumeration value="270"/>
+   <enumeration value="inherit"/>
+   <enumeration value="0deg"/>
+   <enumeration value="90deg"/>
+   <enumeration value="180deg"/>
+   <enumeration value="270deg"/>
+  </restriction>
+ </simpleType>
+ <simpleType name="empty_cells_Type">
+  <restriction base="NMTOKEN">
+   <enumeration value="show"/>
+   <enumeration value="hide"/>
+   <enumeration value="inherit"/>
+  </restriction>
+ </simpleType>
+ <simpleType name="end_indent_Type">
+  <union memberTypes="fo:inherit_Type fo:length_Type fo:percentage_Type"/>
+ </simpleType>
+ <simpleType name="ends_row_Type">
+  <restriction base="NMTOKEN">
+   <enumeration value="true"/>
+   <enumeration value="false"/>
+  </restriction>
+ </simpleType>
+ <simpleType name="extent_Type">
+  <union memberTypes="fo:inherit_Type fo:length_Type fo:percentage_Type"/>
+ </simpleType>
+ <simpleType name="float_Type">
+  <restriction base="NMTOKEN">
+   <enumeration value="inherit"/>
+   <enumeration value="before"/>
+   <enumeration value="start"/>
+   <enumeration value="end"/>
+   <enumeration value="left"/>
+   <enumeration value="right"/>
+   <enumeration value="none"/>
+  </restriction>
+ </simpleType>
+ <simpleType name="family_name_Type">
+  <restriction base="string">
+   <pattern value=".*"/>
+  </restriction>
+ </simpleType>
+ <simpleType name="font_selection_strategy_Type">
+  <restriction base="NMTOKEN">
+   <enumeration value="auto"/>
+   <enumeration value="character-by-character"/>
+   <enumeration value="inherit"/>
+  </restriction>
+ </simpleType>
+ <simpleType name="font_size_adjust_Type">
+  <union memberTypes="fo:inherit_Type fo:none_Type fo:number_Type"/>
+ </simpleType>
+ <simpleType name="font_size_Type">
+  <union memberTypes="fo:absolute_size_Type fo:relative_size_Type fo:inherit_Type fo:length_Type fo:percentage_Type"/>
+ </simpleType>
+ <simpleType name="font_stretch_Type">
+  <restriction base="NMTOKEN">
+   <enumeration value="normal"/>
+   <enumeration value="wider"/>
+   <enumeration value="narrower"/>
+   <enumeration value="ultra-condensed"/>
+   <enumeration value="extra-condensed"/>
+   <enumeration value="condensed"/>
+   <enumeration value="semi-condensed"/>
+   <enumeration value="semi-expanded"/>
+   <enumeration value="expanded"/>
+   <enumeration value="extra-expanded"/>
+   <enumeration value="ultra-expanded"/>
+   <enumeration value="inherit"/>
+  </restriction>
+ </simpleType>
+ <simpleType name="font_style_Type">
+  <restriction base="NMTOKEN">
+   <enumeration value="normal"/>
+   <enumeration value="italic"/>
+   <enumeration value="oblique"/>
+   <enumeration value="backslant"/>
+   <enumeration value="inherit"/>
+  </restriction>
+ </simpleType>
+ <simpleType name="font_weight_Type">
+  <restriction base="NMTOKEN">
+   <enumeration value="normal"/>
+   <enumeration value="bold"/>
+   <enumeration value="bolder"/>
+   <enumeration value="lighter"/>
+   <enumeration value="100"/>
+   <enumeration value="200"/>
+   <enumeration value="300"/>
+   <enumeration value="400"/>
+   <enumeration value="500"/>
+   <enumeration value="600"/>
+   <enumeration value="700"/>
+   <enumeration value="800"/>
+   <enumeration value="900"/>
+   <enumeration value="inherit"/>
+  </restriction>
+ </simpleType>
+ <simpleType name="force_page_count_Type">
+  <restriction base="NMTOKEN">
+   <enumeration value="auto"/>
+   <enumeration value="even"/>
+   <enumeration value="odd"/>
+   <enumeration value="end-on-even"/>
+   <enumeration value="end-on-odd"/>
+   <enumeration value="no-force"/>
+   <enumeration value="inherit"/>
+  </restriction>
+ </simpleType>
+ <simpleType name="grouping_separator_Type">
+  <union memberTypes="fo:character_Type"/>
+ </simpleType>
+ <simpleType name="height_Type">
+  <union memberTypes="fo:percentage_Type fo:length_Type fo:auto_Type fo:inherit_Type"/>
+ </simpleType>
+ <simpleType name="hyphenate_Type">
+  <restriction base="NMTOKEN">
+   <enumeration value="true"/>
+   <enumeration value="false"/>
+   <enumeration value="inherit"/>
+  </restriction>
+ </simpleType>
+ <simpleType name="hyphenation_character_Type">
+  <union memberTypes="fo:character_Type fo:inherit_Type"/>
+ </simpleType>
+ <simpleType name="hyphenation_keep_Type">
+  <restriction base="NMTOKEN">
+   <enumeration value="auto"/>
+   <enumeration value="column"/>
+   <enumeration value="page"/>
+   <enumeration value="inherit"/>
+  </restriction>
+ </simpleType>
+ <simpleType name="hyphenation_ladder_count_Type">
+  <union memberTypes="fo:no_limit_Type fo:inherit_Type fo:integer_Type"/>
+ </simpleType>
+ <simpleType name="indicate_destination_Type">
+  <restriction base="NMTOKEN">
+   <enumeration value="true"/>
+   <enumeration value="false"/>
+  </restriction>
+ </simpleType>
+ <simpleType name="inline_progression_dimension_maximum_Type">
+  <union memberTypes="fo:auto_Type fo:length_Type"/>
+ </simpleType>
+ <simpleType name="inline_progression_dimension_optimum_Type">
+  <union memberTypes="fo:auto_Type fo:length_Type"/>
+ </simpleType>
+ <simpleType name="displace_Type">
+  <restriction base="NMTOKEN">
+   <enumeration value="inherit"/>
+   <enumeration value="auto"/>
+   <enumeration value="none"/>
+   <enumeration value="line"/>
+   <enumeration value="indent"/>
+   <enumeration value="block"/>
+  </restriction>
+ </simpleType>
+ <simpleType name="last_line_end_indent_Type">
+  <union memberTypes="fo:inherit_Type fo:length_Type fo:percentage_Type"/>
+ </simpleType>
+ <simpleType name="leader_alignment_Type">
+  <restriction base="NMTOKEN">
+   <enumeration value="none"/>
+   <enumeration value="reference-area"/>
+   <enumeration value="page"/>
+   <enumeration value="inherit"/>
+  </restriction>
+ </simpleType>
+ <simpleType name="leader_length_Type">
+  <union memberTypes="fo:inherit_Type fo:length_range_Type"/>
+ </simpleType>
+ <simpleType name="leader_pattern_Type">
+  <restriction base="NMTOKEN">
+   <enumeration value="space"/>
+   <enumeration value="rule"/>
+   <enumeration value="dots"/>
+   <enumeration value="use-content"/>
+   <enumeration value="inherit"/>
+  </restriction>
+ </simpleType>
+ <simpleType name="leader_pattern_width_Type">
+  <union memberTypes="fo:use_font_metrics_Type fo:inherit_Type fo:length_Type fo:percentage_Type"/>
+ </simpleType>
+ <simpleType name="left_Type">
+  <union memberTypes="fo:auto_Type fo:inherit_Type fo:length_Type fo:percentage_Type"/>
+ </simpleType>
+ <simpleType name="letter_spacing_Type">
+  <union memberTypes="fo:inherit_Type fo:normal_Type fo:length_Type fo:space_Type"/>
+ </simpleType>
+ <simpleType name="letter_value_Type">
+  <restriction base="NMTOKEN">
+   <enumeration value="auto"/>
+   <enumeration value="alphabetic"/>
+   <enumeration value="traditional"/>
+  </restriction>
+ </simpleType>
+ <simpleType name="line_height_shift_adjustment_Type">
+  <restriction base="NMTOKEN">
+   <enumeration value="consider-shifts"/>
+   <enumeration value="disregard-shifts"/>
+   <enumeration value="inherit"/>
+  </restriction>
+ </simpleType>
+ <simpleType name="line_height_Type">
+  <union memberTypes="fo:percentage_Type fo:length_Type fo:normal_Type fo:inherit_Type fo:integer_Type fo:space_Type"/>
+ </simpleType>
+ <simpleType name="line_stacking_strategy_Type">
+  <restriction base="NMTOKEN">
+   <enumeration value="line-height"/>
+   <enumeration value="font-height"/>
+   <enumeration value="max-height"/>
+   <enumeration value="inherit"/>
+  </restriction>
+ </simpleType>
+ <simpleType name="linefeed_treatment_Type">
+  <restriction base="NMTOKEN">
+   <enumeration value="ignore"/>
+   <enumeration value="preserve"/>
+   <enumeration value="treat-as-space"/>
+   <enumeration value="treat-as-zero-width-space"/>
+   <enumeration value="inherit"/>
+  </restriction>
+ </simpleType>
+ <simpleType name="max_width_Type">
+  <union memberTypes="fo:length_Type fo:percentage_Type fo:none_Type fo:inherit_Type"/>
+ </simpleType>
+ <simpleType name="media_usage_Type">
+  <restriction base="NMTOKEN">
+   <enumeration value="auto"/>
+   <enumeration value="paginate"/>
+   <enumeration value="bounded-in-one-dimension"/>
+   <enumeration value="unbounded"/>
+  </restriction>
+ </simpleType>
+ <simpleType name="odd_or_even_Type">
+  <restriction base="NMTOKEN">
+   <enumeration value="odd"/>
+   <enumeration value="even"/>
+   <enumeration value="any"/>
+   <enumeration value="inherit"/>
+  </restriction>
+ </simpleType>
+ <simpleType name="orphans_Type">
+  <union memberTypes="fo:inherit_Type fo:integer_Type"/>
+ </simpleType>
+ <simpleType name="overflow_Type">
+  <restriction base="NMTOKEN">
+   <enumeration value="auto"/>
+   <enumeration value="visible"/>
+   <enumeration value="hidden"/>
+   <enumeration value="scroll"/>
+   <enumeration value="error-if-overflow"/>
+   <enumeration value="inherit"/>
+  </restriction>
+ </simpleType>
+ <simpleType name="page_break_after_Type">
+  <restriction base="NMTOKEN">
+   <enumeration value="auto"/>
+   <enumeration value="always"/>
+   <enumeration value="avoid"/>
+   <enumeration value="left"/>
+   <enumeration value="right"/>
+   <enumeration value="inherit"/>
+  </restriction>
+ </simpleType>
+ <simpleType name="page_break_inside_Type">
+  <restriction base="NMTOKEN">
+   <enumeration value="auto"/>
+   <enumeration value="avoid"/>
+   <enumeration value="inherit"/>
+  </restriction>
+ </simpleType>
+ <simpleType name="page_position_Type">
+  <restriction base="NMTOKEN">
+   <enumeration value="first"/>
+   <enumeration value="last"/>
+   <enumeration value="rest"/>
+   <enumeration value="any"/>
+   <enumeration value="inherit"/>
+  </restriction>
+ </simpleType>
+ <simpleType name="position_Type">
+  <restriction base="NMTOKEN">
+   <enumeration value="static"/>
+   <enumeration value="relative"/>
+   <enumeration value="absolute"/>
+   <enumeration value="fixed"/>
+   <enumeration value="inherit"/>
+  </restriction>
+ </simpleType>
+ <simpleType name="positive_length_Type">
+  <restriction base="string">
+   <pattern value="\+?\d+\.?\d*(px|pt|mm|cm|in|em|%)"/>
+  </restriction>
+ </simpleType>
+ <simpleType name="precedence_Type">
+  <restriction base="NMTOKEN">
+   <enumeration value="true"/>
+   <enumeration value="false"/>
+   <enumeration value="inherit"/>
+  </restriction>
+ </simpleType>
+ <simpleType name="provisional_distance_between_starts_Type">
+  <union memberTypes="fo:inherit_Type fo:length_Type fo:percentage_Type"/>
+ </simpleType>
+ <simpleType name="provisional_label_separation_Type">
+  <union memberTypes="fo:inherit_Type fo:length_Type fo:percentage_Type"/>
+ </simpleType>
+ <simpleType name="relative_align_Type">
+  <restriction base="NMTOKEN">
+   <enumeration value="before"/>
+   <enumeration value="baseline"/>
+   <enumeration value="inherit"/>
+  </restriction>
+ </simpleType>
+ <simpleType name="relative_position_Type">
+  <restriction base="NMTOKEN">
+   <enumeration value="static"/>
+   <enumeration value="relative"/>
+   <enumeration value="inherit"/>
+  </restriction>
+ </simpleType>
+ <simpleType name="rendering_intent_Type">
+  <restriction base="NMTOKEN">
+   <enumeration value="auto"/>
+   <enumeration value="perceptual"/>
+   <enumeration value="relative-colorimetric"/>
+   <enumeration value="saturation"/>
+   <enumeration value="absolute-colorimetric"/>
+   <enumeration value="inherit"/>
+  </restriction>
+ </simpleType>
+ <simpleType name="retrieve_boundary_Type">
+  <restriction base="NMTOKEN">
+   <enumeration value="page"/>
+   <enumeration value="page-sequence"/>
+   <enumeration value="document"/>
+  </restriction>
+ </simpleType>
+ <simpleType name="retrieve_position_Type">
+  <restriction base="NMTOKEN">
+   <enumeration value="first-starting-within-page"/>
+   <enumeration value="first-including-carryover"/>
+   <enumeration value="last-starting-within-page"/>
+   <enumeration value="last-ending-within-page"/>
+  </restriction>
+ </simpleType>
+ <simpleType name="right_Type">
+  <union memberTypes="fo:auto_Type fo:inherit_Type fo:length_Type fo:percentage_Type"/>
+ </simpleType>
+ <simpleType name="rule_style_Type">
+  <restriction base="NMTOKEN">
+   <enumeration value="none"/>
+   <enumeration value="dotted"/>
+   <enumeration value="dashed"/>
+   <enumeration value="solid"/>
+   <enumeration value="double"/>
+   <enumeration value="groove"/>
+   <enumeration value="ridge"/>
+   <enumeration value="inherit"/>
+  </restriction>
+ </simpleType>
+ <simpleType name="scaling_method_Type">
+  <restriction base="NMTOKEN">
+   <enumeration value="auto"/>
+   <enumeration value="integer-pixels"/>
+   <enumeration value="resample-any-method"/>
+   <enumeration value="inherit"/>
+  </restriction>
+ </simpleType>
+ <simpleType name="scaling_Type">
+  <restriction base="NMTOKEN">
+   <enumeration value="uniform"/>
+   <enumeration value="non-uniform"/>
+   <enumeration value="inherit"/>
+  </restriction>
+ </simpleType>
+ <simpleType name="score_spaces_Type">
+  <restriction base="NMTOKEN">
+   <enumeration value="true"/>
+   <enumeration value="false"/>
+   <enumeration value="inherit"/>
+  </restriction>
+ </simpleType>
+ <simpleType name="show_destination_Type">
+  <restriction base="NMTOKEN">
+   <enumeration value="replace"/>
+   <enumeration value="new"/>
+  </restriction>
+ </simpleType>
+ <simpleType name="size_Type">
+  <union memberTypes="fo:background_position_length_Type fo:size_base_Type"/>
+ </simpleType>
+ <simpleType name="space_start_Type">
+  <union memberTypes="fo:inherit_Type fo:space_Type fo:percentage_Type"/>
+ </simpleType>
+ <simpleType name="span_Type">
+  <restriction base="NMTOKEN">
+   <enumeration value="none"/>
+   <enumeration value="all"/>
+   <enumeration value="inherit"/>
+  </restriction>
+ </simpleType>
+ <simpleType name="speak_header_Type">
+  <restriction base="NMTOKEN">
+   <enumeration value="once"/>
+   <enumeration value="always"/>
+   <enumeration value="inherit"/>
+  </restriction>
+ </simpleType>
+ <simpleType name="speak_numeral_Type">
+  <restriction base="NMTOKEN">
+   <enumeration value="digits"/>
+   <enumeration value="continuous"/>
+   <enumeration value="inherit"/>
+  </restriction>
+ </simpleType>
+ <simpleType name="speak_Type">
+  <restriction base="NMTOKEN">
+   <enumeration value="normal"/>
+   <enumeration value="none"/>
+   <enumeration value="spell-out"/>
+   <enumeration value="inherit"/>
+  </restriction>
+ </simpleType>
+ <simpleType name="speech_rate_Type">
+  <union memberTypes="fo:speech_rate_base_Type fo:integer_Type"/>
+ </simpleType>
+ <simpleType name="start_indent_Type">
+  <union memberTypes="fo:inherit_Type fo:length_Type fo:percentage_Type"/>
+ </simpleType>
+ <simpleType name="starting_state_Type">
+  <restriction base="NMTOKEN">
+   <enumeration value="show"/>
+   <enumeration value="hide"/>
+  </restriction>
+ </simpleType>
+ <simpleType name="starts_row_Type">
+  <restriction base="NMTOKEN">
+   <enumeration value="true"/>
+   <enumeration value="false"/>
+  </restriction>
+ </simpleType>
+ <simpleType name="suppress_at_line_break_Type">
+  <restriction base="NMTOKEN">
+   <enumeration value="auto"/>
+   <enumeration value="suppress"/>
+   <enumeration value="retain"/>
+   <enumeration value="inherit"/>
+  </restriction>
+ </simpleType>
+ <simpleType name="table_layout_Type">
+  <restriction base="NMTOKEN">
+   <enumeration value="auto"/>
+   <enumeration value="fixed"/>
+   <enumeration value="inherit"/>
+  </restriction>
+ </simpleType>
+ <simpleType name="table_omit_footer_at_break_Type">
+  <restriction base="NMTOKEN">
+   <enumeration value="true"/>
+   <enumeration value="false"/>
+  </restriction>
+ </simpleType>
+ <simpleType name="table_omit_header_at_break_Type">
+  <restriction base="NMTOKEN">
+   <enumeration value="true"/>
+   <enumeration value="false"/>
+  </restriction>
+ </simpleType>
+ <simpleType name="text_align_last_Type">
+  <restriction base="NMTOKEN">
+   <enumeration value="start"/>
+   <enumeration value="center"/>
+   <enumeration value="end"/>
+   <enumeration value="justify"/>
+   <enumeration value="inside"/>
+   <enumeration value="outside"/>
+   <enumeration value="left"/>
+   <enumeration value="right"/>
+   <enumeration value="inherit"/>
+  </restriction>
+ </simpleType>
+ <simpleType name="text_align_Type">
+  <restriction base="NMTOKEN">
+   <enumeration value="start"/>
+   <enumeration value="center"/>
+   <enumeration value="end"/>
+   <enumeration value="justify"/>
+   <enumeration value="inside"/>
+   <enumeration value="outside"/>
+   <enumeration value="left"/>
+   <enumeration value="right"/>
+   <enumeration value="inherit"/>
+  </restriction>
+ </simpleType>
+ <simpleType name="text_altitude_Type">
+  <union memberTypes="fo:use_font_metrics_Type fo:inherit_Type fo:length_Type fo:percentage_Type"/>
+ </simpleType>
+ <simpleType name="text_decoration_Type">
+  <restriction base="NMTOKEN">
+   <enumeration value="none"/>
+   <enumeration value="underline"/>
+   <enumeration value="no-underline"/>
+   <enumeration value="overline"/>
+   <enumeration value="no-overline"/>
+   <enumeration value="line-through"/>
+   <enumeration value="no-line-through"/>
+   <enumeration value="blink"/>
+   <enumeration value="no-blink"/>
+   <enumeration value="inherit"/>
+  </restriction>
+ </simpleType>
+ <simpleType name="text_depth_Type">
+  <union memberTypes="fo:use_font_metrics_Type fo:inherit_Type fo:length_Type fo:percentage_Type"/>
+ </simpleType>
+ <simpleType name="text_shadow_Type">
+  <union memberTypes="fo:none_Type fo:color_Type fo:length_range_Type"/>
+ </simpleType>
+ <simpleType name="text_transform_Type">
+  <restriction base="NMTOKEN">
+   <enumeration value="capitalize"/>
+   <enumeration value="uppercase"/>
+   <enumeration value="lowercase"/>
+   <enumeration value="none"/>
+   <enumeration value="inherit"/>
+  </restriction>
+ </simpleType>
+ <simpleType name="top_Type">
+  <union memberTypes="fo:auto_Type fo:inherit_Type fo:length_Type fo:percentage_Type"/>
+ </simpleType>
+ <simpleType name="treat_as_word_space_Type">
+  <restriction base="NMTOKEN">
+   <enumeration value="true"/>
+   <enumeration value="false"/>
+   <enumeration value="auto"/>
+   <enumeration value="inherit"/>
+  </restriction>
+ </simpleType>
+ <simpleType name="unicode_bidi_Type">
+  <restriction base="NMTOKEN">
+   <enumeration value="normal"/>
+   <enumeration value="embed"/>
+   <enumeration value="bidi-override"/>
+   <enumeration value="inherit"/>
+  </restriction>
+ </simpleType>
+ <simpleType name="vertical_align_Type">
+  <union memberTypes="fo:vertical_align_base_Type fo:percentage_Type fo:length_Type"/>
+ </simpleType>
+ <simpleType name="visibility_Type">
+  <restriction base="NMTOKEN">
+   <enumeration value="visible"/>
+   <enumeration value="hidden"/>
+   <enumeration value="collapse"/>
+   <enumeration value="inherit"/>
+  </restriction>
+ </simpleType>
+ <simpleType name="white_space_collapse_Type">
+  <restriction base="NMTOKEN">
+   <enumeration value="false"/>
+   <enumeration value="true"/>
+   <enumeration value="inherit"/>
+  </restriction>
+ </simpleType>
+ <simpleType name="white_space_treatment_Type">
+  <restriction base="NMTOKEN">
+   <enumeration value="ignore"/>
+   <enumeration value="preserve"/>
+   <enumeration value="ignore-if-before-linefeed"/>
+   <enumeration value="ignore-if-after-linefeed"/>
+   <enumeration value="ignore-if-surrounding-linefeed"/>
+   <enumeration value="inherit"/>
+  </restriction>
+ </simpleType>
+ <simpleType name="white_space_Type">
+  <restriction base="NMTOKEN">
+   <enumeration value="normal"/>
+   <enumeration value="pre"/>
+   <enumeration value="nowrap"/>
+   <enumeration value="inherit"/>
+  </restriction>
+ </simpleType>
+ <simpleType name="widows_Type">
+  <union memberTypes="fo:inherit_Type fo:integer_Type"/>
+ </simpleType>
+ <simpleType name="wrap_option_Type">
+  <restriction base="NMTOKEN">
+   <enumeration value="no-wrap"/>
+   <enumeration value="wrap"/>
+   <enumeration value="inherit"/>
+  </restriction>
+ </simpleType>
+ <simpleType name="writing_mode_Type">
+  <restriction base="NMTOKEN">
+   <enumeration value="lr-tb"/>
+   <enumeration value="rl-tb"/>
+   <enumeration value="tb-rl"/>
+   <enumeration value="lr"/>
+   <enumeration value="rl"/>
+   <enumeration value="tb"/>
+   <enumeration value="inherit"/>
+  </restriction>
+ </simpleType>
+ <simpleType name="xml_lang_Type">
+  <union memberTypes="fo:inherit_type"/>
+ </simpleType>
+ <simpleType name="z_index_Type">
+  <union memberTypes="fo:auto_Type fo:inherit_Type fo:integer_Type"/>
+ </simpleType>
+ <simpleType name="padding_width_Type">
+  <union memberTypes="fo:positive_length_Type"/>
+ </simpleType>
+ <simpleType name="proportional_column_width_Type">
+  <restriction base="string">
+   <pattern value="proportional-column-width\(\d+\)"/>
+  </restriction>
+ </simpleType>
+ <simpleType name="color_Name_Type">
+  <restriction base="NMTOKEN">
+   <enumeration value="aliceblue"/>
+   <enumeration value="antiquewhite"/>
+   <enumeration value="aqua"/>
+   <enumeration value="aquamarine"/>
+   <enumeration value="azure"/>
+   <enumeration value="beige"/>
+   <enumeration value="bisque"/>
+   <enumeration value="black"/>
+   <enumeration value="blanchedalmond"/>
+   <enumeration value="blue"/>
+   <enumeration value="blueviolet"/>
+   <enumeration value="brown"/>
+   <enumeration value="burlywood"/>
+   <enumeration value="cadetblue"/>
+   <enumeration value="chartreuse"/>
+   <enumeration value="chocolate"/>
+   <enumeration value="coral"/>
+   <enumeration value="cornflowerblue"/>
+   <enumeration value="cornsilk"/>
+   <enumeration value="crimson"/>
+   <enumeration value="cyan"/>
+   <enumeration value="darkblue"/>
+   <enumeration value="darkcyan"/>
+   <enumeration value="darkgoldenrod"/>
+   <enumeration value="darkgray"/>
+   <enumeration value="darkgreen"/>
+   <enumeration value="darkgrey"/>
+   <enumeration value="darkkhaki"/>
+   <enumeration value="darkmagenta"/>
+   <enumeration value="darkolivegreen"/>
+   <enumeration value="darkorange"/>
+   <enumeration value="darkorchid"/>
+   <enumeration value="darkred"/>
+   <enumeration value="darksalmon"/>
+   <enumeration value="darkseagreen"/>
+   <enumeration value="darkslateblue"/>
+   <enumeration value="darkslategray"/>
+   <enumeration value="darkslategrey"/>
+   <enumeration value="darkturquoise"/>
+   <enumeration value="darkviolet"/>
+   <enumeration value="deeppink"/>
+   <enumeration value="deepskyblue"/>
+   <enumeration value="dimgray"/>
+   <enumeration value="dimgrey"/>
+   <enumeration value="dodgerblue"/>
+   <enumeration value="firebrick"/>
+   <enumeration value="floralwhite"/>
+   <enumeration value="forestgreen"/>
+   <enumeration value="fuchsia"/>
+   <enumeration value="gainsboro"/>
+   <enumeration value="lightpink"/>
+   <enumeration value="lightsalmon"/>
+   <enumeration value="lightseagreen"/>
+   <enumeration value="lightskyblue"/>
+   <enumeration value="lightslategray"/>
+   <enumeration value="lightslategrey"/>
+   <enumeration value="lightsteelblue"/>
+   <enumeration value="lightyellow"/>
+   <enumeration value="lime"/>
+   <enumeration value="limegreen"/>
+   <enumeration value="linen"/>
+   <enumeration value="magenta"/>
+   <enumeration value="maroon"/>
+   <enumeration value="mediumaquamarine"/>
+   <enumeration value="mediumblue"/>
+   <enumeration value="mediumorchid"/>
+   <enumeration value="mediumpurple"/>
+   <enumeration value="mediumseagreen"/>
+   <enumeration value="mediumslateblue"/>
+   <enumeration value="mediumspringgreen"/>
+   <enumeration value="mediumturquoise"/>
+   <enumeration value="mediumvioletred"/>
+   <enumeration value="midnightblue"/>
+   <enumeration value="mintcream"/>
+   <enumeration value="mistyrose"/>
+   <enumeration value="moccasin"/>
+   <enumeration value="navajowhite"/>
+   <enumeration value="navy"/>
+   <enumeration value="oldlace"/>
+   <enumeration value="olive"/>
+   <enumeration value="olivedrab"/>
+   <enumeration value="orange"/>
+   <enumeration value="orangered"/>
+   <enumeration value="orchid"/>
+   <enumeration value="palegoldenrod"/>
+   <enumeration value="palegreen"/>
+   <enumeration value="paleturquoise"/>
+   <enumeration value="palevioletred"/>
+   <enumeration value="papayawhip"/>
+   <enumeration value="peachpuff"/>
+   <enumeration value="peru"/>
+   <enumeration value="pink"/>
+   <enumeration value="plum"/>
+   <enumeration value="powderblue"/>
+   <enumeration value="purple"/>
+   <enumeration value="red"/>
+   <enumeration value="rosybrown"/>
+   <enumeration value="royalblue"/>
+   <enumeration value="saddlebrown"/>
+   <enumeration value="salmon"/>
+   <enumeration value="ghostwhite"/>
+   <enumeration value="gold"/>
+   <enumeration value="goldenrod"/>
+   <enumeration value="gray"/>
+   <enumeration value="grey"/>
+   <enumeration value="green"/>
+   <enumeration value="greenyellow"/>
+   <enumeration value="honeydew"/>
+   <enumeration value="hotpink"/>
+   <enumeration value="indianred"/>
+   <enumeration value="indigo"/>
+   <enumeration value="ivory"/>
+   <enumeration value="khaki"/>
+   <enumeration value="lavender"/>
+   <enumeration value="lavenderblush"/>
+   <enumeration value="lawngreen"/>
+   <enumeration value="lemonchiffon"/>
+   <enumeration value="lightblue"/>
+   <enumeration value="lightcoral"/>
+   <enumeration value="lightcyan"/>
+   <enumeration value="lightgoldenrodyellow"/>
+   <enumeration value="lightgray"/>
+   <enumeration value="lightgreen"/>
+   <enumeration value="lightgrey"/>
+   <enumeration value="sandybrown"/>
+   <enumeration value="seagreen"/>
+   <enumeration value="seashell"/>
+   <enumeration value="sienna"/>
+   <enumeration value="silver"/>
+   <enumeration value="skyblue"/>
+   <enumeration value="slateblue"/>
+   <enumeration value="slategray"/>
+   <enumeration value="slategrey"/>
+   <enumeration value="snow"/>
+   <enumeration value="springgreen"/>
+   <enumeration value="steelblue"/>
+   <enumeration value="tan"/>
+   <enumeration value="teal"/>
+   <enumeration value="thistle"/>
+   <enumeration value="tomato"/>
+   <enumeration value="turquoise"/>
+   <enumeration value="violet"/>
+   <enumeration value="wheat"/>
+   <enumeration value="white"/>
+   <enumeration value="whitesmoke"/>
+   <enumeration value="yellow"/>
+   <enumeration value="yellowgreen"/>
+  </restriction>
+ </simpleType>
+ <simpleType name="language_Type">
+  <restriction base="NMTOKEN">
+   <enumeration value="none"/>
+   <enumeration value="inherit"/>
+   <enumeration value="AY"/>
+   <enumeration value="GN"/>
+   <enumeration value="QU"/>
+   <enumeration value="DZ"/>
+   <enumeration value="MY"/>
+   <enumeration value="KM"/>
+   <enumeration value="ZH"/>
+   <enumeration value="JA"/>
+   <enumeration value="KO"/>
+   <enumeration value="LO"/>
+   <enumeration value="TH"/>
+   <enumeration value="BO"/>
+   <enumeration value="VI"/>
+   <enumeration value="LV"/>
+   <enumeration value="LT"/>
+   <enumeration value="EU"/>
+   <enumeration value="BR"/>
+   <enumeration value="GA"/>
+   <enumeration value="GD"/>
+   <enumeration value="CY"/>
+   <enumeration value="KN"/>
+   <enumeration value="ML"/>
+   <enumeration value="TA"/>
+   <enumeration value="TE"/>
+   <enumeration value="KL"/>
+   <enumeration value="IK"/>
+   <enumeration value="ET"/>
+   <enumeration value="FI"/>
+   <enumeration value="HU"/>
+   <enumeration value="AF"/>
+   <enumeration value="DA"/>
+   <enumeration value="NL"/>
+   <enumeration value="EN"/>
+   <enumeration value="FO"/>
+   <enumeration value="FY"/>
+   <enumeration value="DE"/>
+   <enumeration value="IS"/>
+   <enumeration value="NO"/>
+   <enumeration value="SV"/>
+   <enumeration value="YI"/>
+   <enumeration value="OM"/>
+   <enumeration value="AA"/>
+   <enumeration value="SO"/>
+   <enumeration value="AB"/>
+   <enumeration value="KA"/>
+   <enumeration value="AS"/>
+   <enumeration value="BN"/>
+   <enumeration value="BH"/>
+   <enumeration value="GU"/>
+   <enumeration value="HI"/>
+   <enumeration value="KS"/>
+   <enumeration value="MR"/>
+   <enumeration value="NE"/>
+   <enumeration value="OR"/>
+   <enumeration value="PA"/>
+   <enumeration value="SA"/>
+   <enumeration value="SD"/>
+   <enumeration value="SI"/>
+   <enumeration value="UR"/>
+   <enumeration value="SQ"/>
+   <enumeration value="HY"/>
+   <enumeration value="EO"/>
+   <enumeration value="IA"/>
+   <enumeration value="IE"/>
+   <enumeration value="VO"/>
+   <enumeration value="KU"/>
+   <enumeration value="PS"/>
+   <enumeration value="FA"/>
+   <enumeration value="TG"/>
+   <enumeration value="EL"/>
+   <enumeration value="LA"/>
+   <enumeration value="HA"/>
+   <enumeration value="RW"/>
+   <enumeration value="RN"/>
+   <enumeration value="LN"/>
+   <enumeration value="SG"/>
+   <enumeration value="ST"/>
+   <enumeration value="TN"/>
+   <enumeration value="SN"/>
+   <enumeration value="SS"/>
+   <enumeration value="SW"/>
+   <enumeration value="TS"/>
+   <enumeration value="TW"/>
+   <enumeration value="WO"/>
+   <enumeration value="XH"/>
+   <enumeration value="YO"/>
+   <enumeration value="ZU"/>
+   <enumeration value="FJ"/>
+   <enumeration value="ID"/>
+   <enumeration value="JV"/>
+   <enumeration value="MG"/>
+   <enumeration value="MS"/>
+   <enumeration value="MI"/>
+   <enumeration value="SM"/>
+   <enumeration value="SU"/>
+   <enumeration value="TL"/>
+   <enumeration value="TO"/>
+   <enumeration value="CA"/>
+   <enumeration value="CO"/>
+   <enumeration value="FR"/>
+   <enumeration value="GL"/>
+   <enumeration value="IT"/>
+   <enumeration value="MO"/>
+   <enumeration value="OC"/>
+   <enumeration value="PT"/>
+   <enumeration value="RM"/>
+   <enumeration value="RO"/>
+   <enumeration value="ES"/>
+   <enumeration value="AM"/>
+   <enumeration value="AR"/>
+   <enumeration value="HE"/>
+   <enumeration value="MT"/>
+   <enumeration value="TI"/>
+   <enumeration value="BG"/>
+   <enumeration value="BE"/>
+   <enumeration value="HR"/>
+   <enumeration value="CS"/>
+   <enumeration value="MK"/>
+   <enumeration value="PL"/>
+   <enumeration value="RU"/>
+   <enumeration value="SR"/>
+   <enumeration value="SH"/>
+   <enumeration value="SK"/>
+   <enumeration value="SL"/>
+   <enumeration value="UK"/>
+   <enumeration value="AZ"/>
+   <enumeration value="BA"/>
+   <enumeration value="KK"/>
+   <enumeration value="KY"/>
+   <enumeration value="TT"/>
+   <enumeration value="TR"/>
+   <enumeration value="TK"/>
+   <enumeration value="UZ"/>
+   <enumeration value="BI"/>
+   <enumeration value="MN"/>
+   <enumeration value="NA"/>
+  </restriction>
+ </simpleType>
+ <simpleType name="angle_Type">
+  <restriction base="string">
+   <pattern value="[\+\-]?[1-3]?\d?\d?\.?\d*(deg|grad|rad)"/>
+  </restriction>
+ </simpleType>
+ <simpleType name="background_position_length_Type">
+  <xs:restriction>
+   <xs:simpleType>
+    <xs:list>
+     <xs:simpleType>
+      <xs:restriction base="fo:length_Type"/>
+     </xs:simpleType>
+    </xs:list>
+   </xs:simpleType>
+   <xs:minLength value="1"/>
+   <xs:maxLength value="2"/>
+  </xs:restriction>
+ </simpleType>
+ <simpleType name="background_position_percentage_Type">
+  <xs:restriction>
+   <xs:simpleType>
+    <xs:list>
+     <xs:simpleType>
+      <xs:restriction base="fo:percentage_Type"/>
+     </xs:simpleType>
+    </xs:list>
+   </xs:simpleType>
+   <xs:minLength value="1"/>
+   <xs:maxLength value="2"/>
+  </xs:restriction>
+ </simpleType>
+ <simpleType name="color_Hex_Type">
+  <restriction base="string">
+   <pattern value="#[0-9A-F]{6}"/>
+  </restriction>
+ </simpleType>
+ <simpleType name="conditionality_Type">
+  <restriction base="NMTOKEN">
+   <enumeration value="retain"/>
+   <enumeration value="discard"/>
+  </restriction>
+ </simpleType>
+ <simpleType name="integer_Type">
+  <restriction base="NMTOKEN">
+   <pattern value="[\+\-]?\d+"/>
+  </restriction>
+ </simpleType>
+ <simpleType name="keep_compound_Type">
+  <xs:restriction>
+   <xs:simpleType>
+    <xs:list>
+     <xs:simpleType>
+      <xs:restriction base="fo:keep_integer_Type"/>
+     </xs:simpleType>
+    </xs:list>
+   </xs:simpleType>
+   <xs:minLength value="1"/>
+   <xs:maxLength value="3"/>
+  </xs:restriction>
+ </simpleType>
+ <simpleType name="keep_integer_Type">
+  <restriction base="NMTOKEN">
+   <pattern value="(\+?\d+|auto|always)"/>
+  </restriction>
+ </simpleType>
+ <simpleType name="length_bp_ip_direction_Type">
+  <xs:restriction>
+   <xs:simpleType>
+    <xs:list>
+     <xs:simpleType>
+      <xs:restriction base="fo:length_Type"/>
+     </xs:simpleType>
+    </xs:list>
+   </xs:simpleType>
+   <xs:minLength value="1"/>
+   <xs:maxLength value="2"/>
+  </xs:restriction>
+ </simpleType>
+ <simpleType name="length_conditional_Type">
+  <restriction base="string">
+   <pattern value="\+?\d+\.?\d*(px|pt|mm|cm|in|em|%) (retain|discard)"/>
+  </restriction>
+ </simpleType>
+ <simpleType name="length_range_Type">
+  <xs:restriction>
+   <xs:simpleType>
+    <xs:list>
+     <xs:simpleType>
+      <xs:restriction base="fo:length_Type"/>
+     </xs:simpleType>
+    </xs:list>
+   </xs:simpleType>
+   <xs:minLength value="3"/>
+   <xs:maxLength value="3"/>
+  </xs:restriction>
+ </simpleType>
+ <simpleType name="length_Type">
+  <restriction base="string">
+   <pattern value="[\+\-]?\d+\.?\d*(px|pt|mm|cm|in|em|%)"/>
+  </restriction>
+ </simpleType>
+ <simpleType name="number_Type">
+  <restriction base="string">
+   <pattern value="[\+\-]?\d+\.\d*"/>
+  </restriction>
+ </simpleType>
+ <simpleType name="percentage_Type">
+  <restriction base="string">
+   <pattern value="[\+\-]?\d+\.?\d*%"/>
+  </restriction>
+ </simpleType>
+ <simpleType name="space_Type">
+  <restriction base="string">
+   <pattern value="([ ]?\+?\d+\.?\d*(px|pt|mm|cm|in|em|%)){1,3}( \+?\d+| force)?( retain| discard)?"/>
+  </restriction>
+ </simpleType>
+ <simpleType name="inherit_type">
+  <restriction base="NMTOKEN">
+   <enumeration value="inherit"/>
+  </restriction>
+ </simpleType>
+ <simpleType name="inherit_none_type">
+  <restriction base="NMTOKEN">
+   <enumeration value="inherit"/>
+   <enumeration value="none"/>
+  </restriction>
+ </simpleType>
+ <element name="block">
+  <complexType mixed="true">
+   <choice maxOccurs="unbounded" minOccurs="0">
+    <group ref="fo:inline_List"/>
+    <group ref="fo:block_List"/>
+    <group ref="fo:neutral_List"/>
+    <group ref="fo:marker_List"/>
+    <group ref="fo:initial_property_set_List"/>
+    <group ref="fo:float_List"/>
+    <group ref="fo:footnote_List"/>
+   </choice>
+   <attributeGroup ref="fo:inheritable_properties_List"/>
+   <attributeGroup ref="fo:Accessibility_Properties_List"/>
+   <attributeGroup ref="fo:Aural_Properties_List"/>
+   <attributeGroup ref="fo:Border_Padding_and_Background_Properties_List"/>
+   <attributeGroup ref="fo:Font_Properties_List"/>
+   <attributeGroup ref="fo:Hyphenation_Properties_List"/>
+   <attributeGroup ref="fo:Margin_Properties_Block_List"/>
+   <attributeGroup ref="fo:Relative_Position_Properties_List"/>
+   <attributeGroup ref="fo:block_hyphenation_Properties_List"/>
+   <attributeGroup ref="fo:line_height_Properties_List"/>
+   <attributeGroup ref="fo:text_one_Properties_List"/>
+   <attributeGroup ref="fo:block_properties"/>
+   <attributeGroup ref="fo:keep_Properties_List"/>
+   <attributeGroup ref="fo:break_Properties_List"/>
+   <attributeGroup ref="fo:intrusion_displace_Properties_List"/>
+   <attribute name="id" type="xs:string"/>
+   <attribute name="span" type="fo:span_Type"/>
+  </complexType>
+ </element>
+ <element name="block-container">
+  <complexType>
+   <choice maxOccurs="unbounded">
+    <group ref="fo:block_List"/>
+    <group ref="fo:neutral_List"/>
+    <group ref="fo:marker_List"/>
+    <group ref="fo:float_List"/>
+    <group ref="fo:footnote_List"/>
+   </choice>
+   <attributeGroup ref="fo:inheritable_properties_List"/>
+   <attributeGroup ref="fo:Absolute_Position_Properties_List"/>
+   <attributeGroup ref="fo:Border_Padding_and_Background_Properties_List"/>
+   <attributeGroup ref="fo:Margin_Properties_Block_List"/>
+   <attributeGroup ref="fo:block_properties"/>
+   <attributeGroup ref="fo:reference_Properties_List"/>
+   <attributeGroup ref="fo:clip_Properties_List"/>
+   <attributeGroup ref="fo:progression_Properties_List"/>
+   <attributeGroup ref="fo:keep_Properties_List"/>
+   <attributeGroup ref="fo:break_Properties_List"/>
+   <attributeGroup ref="fo:intrusion_displace_Properties_List"/>
+   <attribute name="height" type="fo:height_Type"/>
+   <attribute name="id" type="xs:string"/>
+   <attribute name="overflow" type="fo:overflow_Type"/>
+   <attribute name="span" type="fo:span_Type"/>
+   <attribute name="width" type="fo:height_Type"/>
+   <attribute name="z-index" type="fo:z_index_Type"/>
+  </complexType>
+ </element>
+ <element name="bidi-override">
+  <complexType mixed="true">
+   <choice maxOccurs="unbounded" minOccurs="0">
+    <group ref="fo:block_List"/>
+    <group ref="fo:inline_List"/>
+    <group ref="fo:neutral_List"/>
+    <group ref="fo:marker_List"/>
+    <group ref="fo:float_List"/>
+    <group ref="fo:footnote_List"/>
+   </choice>
+   <attributeGroup ref="fo:inheritable_properties_List"/>
+   <attributeGroup ref="fo:Aural_Properties_List"/>
+   <attributeGroup ref="fo:Relative_Position_Properties_List"/>
+   <attributeGroup ref="fo:Font_Properties_List"/>
+   <attribute name="id" type="xs:string"/>
+   <attribute name="unicode-bidi" type="fo:unicode_bidi_Type"/>
+   <attribute name="vertical-align" type="fo:vertical_align_Type"/>
+  </complexType>
+ </element>
+ <element name="character">
+  <complexType>
+   <attributeGroup ref="fo:inheritable_properties_List"/>
+   <attributeGroup ref="fo:Aural_Properties_List"/>
+   <attributeGroup ref="fo:Border_Padding_and_Background_Properties_List"/>
+   <attributeGroup ref="fo:Font_Properties_List"/>
+   <attributeGroup ref="fo:Hyphenation_Properties_List"/>
+   <attributeGroup ref="fo:Margin_Properties_Inline_List"/>
+   <attributeGroup ref="fo:Relative_Position_Properties_List"/>
+   <attributeGroup ref="fo:text_one_Properties_List"/>
+   <attribute name="alignment-adjust" type="fo:alignment_adjust_Type"/>
+   <attribute name="treat-as-word-space" type="fo:treat_as_word_space_Type"/>
+   <attribute name="alignment-baseline" type="fo:alignment_baseline_Type"/>
+   <attribute name="baseline-shift" type="fo:baseline_shift_Type"/>
+   <attribute name="character" type="fo:character_Type"/>
+   <attribute name="dominant-baseline" type="fo:dominant_baseline_Type"/>
+   <attribute name="id" type="xs:string"/>
+   <attribute name="keep-with-next" type="fo:keep_integer_Type"/>
+   <attribute name="keep-with-previous" type="fo:keep_integer_Type"/>
+   <attribute name="suppress-at-line-break" type="fo:suppress_at_line_break_Type"/>
+   <attribute name="text-decoration" type="fo:text_decoration_Type"/>
+   <attribute name="text-shadow" type="fo:text_shadow_Type"/>
+   <attribute name="vertical-align" type="fo:vertical_align_Type"/>
+  </complexType>
+ </element>
+ <element name="external-graphic">
+  <complexType>
+   <attributeGroup ref="fo:inheritable_properties_List"/>
+   <attributeGroup ref="fo:Accessibility_Properties_List"/>
+   <attributeGroup ref="fo:Aural_Properties_List"/>
+   <attributeGroup ref="fo:Border_Padding_and_Background_Properties_List"/>
+   <attributeGroup ref="fo:Margin_Properties_Inline_List"/>
+   <attributeGroup ref="fo:Relative_Position_Properties_List"/>
+   <attributeGroup ref="fo:clip_Properties_List"/>
+   <attributeGroup ref="fo:progression_Properties_List"/>
+   <attribute name="alignment-adjust" type="fo:alignment_adjust_Type"/>
+   <attribute name="alignment-baseline" type="fo:alignment_baseline_Type"/>
+   <attribute name="baseline-shift" type="fo:baseline_shift_Type"/>
+   <attribute name="content-height" type="fo:content_height_Type"/>
+   <attribute name="content-type" type="xs:string"/>
+   <attribute name="content-width" type="fo:content_height_Type"/>
+   <attribute name="dominant-baseline" type="fo:dominant_baseline_Type"/>
+   <attribute name="height" type="fo:height_Type"/>
+   <attribute name="id" type="xs:string"/>
+   <attribute name="keep-with-next" type="fo:keep_integer_Type"/>
+   <attribute name="keep-with-previous" type="fo:keep_integer_Type"/>
+   <attribute name="overflow" type="fo:overflow_Type"/>
+   <attribute name="scaling" type="fo:scaling_Type"/>
+   <attribute name="scaling-method" type="fo:scaling_method_Type"/>
+   <attribute name="width" type="fo:height_Type"/>
+   <attribute name="vertical-align" type="fo:vertical_align_Type"/>
+   <attribute name="src" use="required" type="xs:string"/>
+  </complexType>
+ </element>
+ <element name="initial-property-set">
+  <complexType>
+   <attributeGroup ref="fo:inheritable_properties_List"/>
+   <attributeGroup ref="fo:Accessibility_Properties_List"/>
+   <attributeGroup ref="fo:Aural_Properties_List"/>
+   <attributeGroup ref="fo:Border_Padding_and_Background_Properties_List"/>
+   <attributeGroup ref="fo:Font_Properties_List"/>
+   <attributeGroup ref="fo:Relative_Position_Properties_List"/>
+   <attribute name="text-decoration" type="fo:text_decoration_Type"/>
+   <attribute name="text-shadow" type="fo:text_shadow_Type"/>
+   <attribute name="id" type="xs:string"/>
+  </complexType>
+ </element>
+ <element name="inline">
+  <complexType mixed="true">
+   <choice maxOccurs="unbounded" minOccurs="0">
+    <group ref="fo:inline_List"/>
+    <group ref="fo:block_List"/>
+    <group ref="fo:neutral_List"/>
+    <group ref="fo:marker_List"/>
+    <group ref="fo:float_List"/>
+    <group ref="fo:footnote_List"/>
+   </choice>
+   <attributeGroup ref="fo:inheritable_properties_List"/>
+   <attributeGroup ref="fo:Accessibility_Properties_List"/>
+   <attributeGroup ref="fo:Aural_Properties_List"/>
+   <attributeGroup ref="fo:Border_Padding_and_Background_Properties_List"/>
+   <attributeGroup ref="fo:Font_Properties_List"/>
+   <attributeGroup ref="fo:Margin_Properties_Inline_List"/>
+   <attributeGroup ref="fo:Relative_Position_Properties_List"/>
+   <attributeGroup ref="fo:progression_Properties_List"/>
+   <attributeGroup ref="fo:keep_Properties_List"/>
+   <attribute name="height" type="fo:height_Type"/>
+   <attribute name="id" type="xs:string"/>
+   <attribute name="text-decoration" type="fo:text_decoration_Type"/>
+   <attribute name="vertical-align" type="fo:vertical_align_Type"/>
+   <attribute name="alignment-adjust" type="fo:alignment_adjust_Type"/>
+   <attribute name="alignment-baseline" type="fo:alignment_baseline_Type"/>
+   <attribute name="baseline-shift" type="fo:baseline_shift_Type"/>
+   <attribute name="dominant-baseline" type="fo:dominant_baseline_Type"/>
+   <attribute name="width" type="fo:height_Type"/>
+  </complexType>
+ </element>
+ <element name="inline-container">
+  <complexType>
+   <choice maxOccurs="unbounded">
+    <group ref="fo:neutral_List"/>
+    <group ref="fo:marker_List"/>
+    <group ref="fo:float_List"/>
+    <group ref="fo:footnote_List"/>
+    <group ref="fo:block_List"/>
+   </choice>
+   <attributeGroup ref="fo:inheritable_properties_List"/>
+   <attributeGroup ref="fo:Border_Padding_and_Background_Properties_List"/>
+   <attributeGroup ref="fo:Margin_Properties_Inline_List"/>
+   <attributeGroup ref="fo:Relative_Position_Properties_List"/>
+   <attributeGroup ref="fo:reference_Properties_List"/>
+   <attributeGroup ref="fo:clip_Properties_List"/>
+   <attributeGroup ref="fo:progression_Properties_List"/>
+   <attributeGroup ref="fo:keep_Properties_List"/>
+   <attribute name="height" type="fo:height_Type"/>
+   <attribute name="id" type="xs:string"/>
+   <attribute name="overflow" type="fo:overflow_Type"/>
+   <attribute name="vertical-align" type="fo:vertical_align_Type"/>
+   <attribute name="alignment-adjust" type="fo:alignment_adjust_Type"/>
+   <attribute name="alignment-baseline" type="fo:alignment_baseline_Type"/>
+   <attribute name="baseline-shift" type="fo:baseline_shift_Type"/>
+   <attribute name="dominant-baseline" type="fo:dominant_baseline_Type"/>
+   <attribute name="width" type="fo:height_Type"/>
+  </complexType>
+ </element>
+ <element name="instream-foreign-object">
+  <complexType>
+   <attributeGroup ref="fo:inheritable_properties_List"/>
+   <attributeGroup ref="fo:Accessibility_Properties_List"/>
+   <attributeGroup ref="fo:Aural_Properties_List"/>
+   <attributeGroup ref="fo:Border_Padding_and_Background_Properties_List"/>
+   <attributeGroup ref="fo:Margin_Properties_Inline_List"/>
+   <attributeGroup ref="fo:Relative_Position_Properties_List"/>
+   <attributeGroup ref="fo:clip_Properties_List"/>
+   <attributeGroup ref="fo:progression_Properties_List"/>
+   <attribute name="alignment-adjust" type="fo:alignment_adjust_Type"/>
+   <attribute name="alignment-baseline" type="fo:alignment_baseline_Type"/>
+   <attribute name="baseline-shift" type="fo:baseline_shift_Type"/>
+   <attribute name="content-height" type="fo:content_height_Type"/>
+   <attribute name="content-type" type="xs:string"/>
+   <attribute name="content-width" type="fo:content_height_Type"/>
+   <attribute name="dominant-baseline" type="fo:dominant_baseline_Type"/>
+   <attribute name="height" type="fo:height_Type"/>
+   <attribute name="id" type="xs:string"/>
+   <attribute name="keep-with-next" type="fo:keep_integer_Type"/>
+   <attribute name="keep-with-previous" type="fo:keep_integer_Type"/>
+   <attribute name="overflow" type="fo:overflow_Type"/>
+   <attribute name="scaling" type="fo:scaling_Type"/>
+   <attribute name="scaling-method" type="fo:scaling_method_Type"/>
+   <attribute name="width" type="fo:height_Type"/>
+   <attribute name="vertical-align" type="fo:vertical_align_Type"/>
+  </complexType>
+ </element>
+ <element name="leader">
+  <complexType mixed="true">
+   <choice maxOccurs="unbounded" minOccurs="0">
+    <group ref="fo:neutral_List"/>
+    <group ref="fo:inline_List"/>
+   </choice>
+   <attributeGroup ref="fo:inheritable_properties_List"/>
+   <attributeGroup ref="fo:Accessibility_Properties_List"/>
+   <attributeGroup ref="fo:Aural_Properties_List"/>
+   <attributeGroup ref="fo:Border_Padding_and_Background_Properties_List"/>
+   <attributeGroup ref="fo:Font_Properties_List"/>
+   <attributeGroup ref="fo:Margin_Properties_Inline_List"/>
+   <attributeGroup ref="fo:Relative_Position_Properties_List"/>
+   <attributeGroup ref="fo:text_one_Properties_List"/>
+   <attribute name="id" type="xs:string"/>
+   <attribute name="keep-with-next" type="fo:keep_integer_Type"/>
+   <attribute name="keep-with-previous" type="fo:keep_integer_Type"/>
+   <attribute name="text-shadow" type="fo:text_shadow_Type"/>
+   <attribute name="vertical-align" type="fo:vertical_align_Type"/>
+   <attribute name="alignment-adjust" type="fo:alignment_adjust_Type"/>
+   <attribute name="alignment-baseline" type="fo:alignment_baseline_Type"/>
+   <attribute name="baseline-shift" type="fo:baseline_shift_Type"/>
+   <attribute name="dominant-baseline" type="fo:dominant_baseline_Type"/>
+  </complexType>
+ </element>
+ <element name="page-number">
+  <complexType>
+   <attributeGroup ref="fo:inheritable_properties_List"/>
+   <attributeGroup ref="fo:Accessibility_Properties_List"/>
+   <attributeGroup ref="fo:Aural_Properties_List"/>
+   <attributeGroup ref="fo:Border_Padding_and_Background_Properties_List"/>
+   <attributeGroup ref="fo:Font_Properties_List"/>
+   <attributeGroup ref="fo:Margin_Properties_Inline_List"/>
+   <attributeGroup ref="fo:Relative_Position_Properties_List"/>
+   <attributeGroup ref="fo:text_one_Properties_List"/>
+   <attribute name="alignment-adjust" type="fo:alignment_adjust_Type"/>
+   <attribute name="alignment-baseline" type="fo:alignment_baseline_Type"/>
+   <attribute name="baseline-shift" type="fo:baseline_shift_Type"/>
+   <attribute name="dominant-baseline" type="fo:dominant_baseline_Type"/>
+   <attribute name="id" type="xs:string"/>
+   <attribute name="keep-with-next" type="fo:keep_integer_Type"/>
+   <attribute name="keep-with-previous" type="fo:keep_integer_Type"/>
+   <attribute name="text-decoration" type="fo:text_decoration_Type"/>
+   <attribute name="text-shadow" type="fo:text_shadow_Type"/>
+   <attribute name="vertical-align" type="fo:vertical_align_Type"/>
+  </complexType>
+ </element>
+ <element name="page-number-citation">
+  <complexType>
+   <attributeGroup ref="fo:inheritable_properties_List"/>
+   <attributeGroup ref="fo:Accessibility_Properties_List"/>
+   <attributeGroup ref="fo:Aural_Properties_List"/>
+   <attributeGroup ref="fo:Border_Padding_and_Background_Properties_List"/>
+   <attributeGroup ref="fo:Font_Properties_List"/>
+   <attributeGroup ref="fo:Margin_Properties_Inline_List"/>
+   <attributeGroup ref="fo:Relative_Position_Properties_List"/>
+   <attributeGroup ref="fo:text_one_Properties_List"/>
+   <attribute name="alignment-adjust" type="fo:alignment_adjust_Type"/>
+   <attribute name="alignment-baseline" type="fo:alignment_baseline_Type"/>
+   <attribute name="baseline-shift" type="fo:baseline_shift_Type"/>
+   <attribute name="dominant-baseline" type="fo:dominant_baseline_Type"/>
+   <attribute name="id" type="xs:string"/>
+   <attribute name="keep-with-next" type="fo:keep_integer_Type"/>
+   <attribute name="keep-with-previous" type="fo:keep_integer_Type"/>
+   <attribute name="text-decoration" type="fo:text_decoration_Type"/>
+   <attribute name="text-shadow" type="fo:text_shadow_Type"/>
+   <attribute name="vertical-align" type="fo:vertical_align_Type"/>
+   <attribute name="ref-id" use="required" type="xs:string"/>
+  </complexType>
+ </element>
+ <element name="color-profile">
+  <complexType>
+   <attributeGroup ref="fo:inheritable_properties_List"/>
+   <attribute name="rendering-intent" type="fo:rendering_intent_Type"/>
+   <attribute name="color-profile-name" use="required" type="xs:string"/>
+   <attribute name="src" use="required" type="xs:string"/>
+  </complexType>
+ </element>
+ <element name="conditional-page-master-reference">
+  <complexType>
+   <attributeGroup ref="fo:inheritable_properties_List"/>
+   <attribute name="page-position" type="fo:page_position_Type"/>
+   <attribute name="odd-or-even" type="fo:odd_or_even_Type"/>
+   <attribute name="blank-or-not-blank" type="fo:blank_or_not_blank_Type"/>
+   <attribute name="master-reference" use="required" type="xs:string"/>
+  </complexType>
+ </element>
+ <element name="declarations">
+  <complexType>
+   <sequence>
+    <element ref="fo:color-profile" maxOccurs="unbounded" minOccurs="0"/>
+    <any maxOccurs="unbounded" minOccurs="0" namespace="##other" processContents="skip"/>
+   </sequence>
+   <attributeGroup ref="fo:inheritable_properties_List"/>
+  </complexType>
+ </element>
+ <element name="flow">
+  <complexType>
+   <choice maxOccurs="unbounded">
+    <group ref="fo:block_List"/>
+    <group ref="fo:neutral_List"/>
+    <group ref="fo:marker_List"/>
+    <group ref="fo:float_List"/>
+    <group ref="fo:footnote_List"/>
+   </choice>
+   <attributeGroup ref="fo:inheritable_properties_List"/>
+   <attribute name="flow-name" use="required" type="xs:string"/>
+  </complexType>
+ </element>
+ <element name="flow-assignment">
+  <complexType>
+   <sequence>
+    <element ref="fo:flow-source-list"/>
+    <element ref="fo:flow-target-list"/>
+   </sequence>
+   <attributeGroup ref="fo:inheritable_properties_List"/>
+  </complexType>
+ </element>
+ <element name="flow-name-specifier">
+  <complexType>
+   <attributeGroup ref="fo:inheritable_properties_List"/>
+   <attribute name="flow-name-reference" type="xs:string"/>
+  </complexType>
+ </element>
+ <element name="flow-source-list">
+  <complexType>
+   <sequence>
+    <element ref="fo:flow-name-specifier" maxOccurs="unbounded"/>
+   </sequence>
+   <attributeGroup ref="fo:inheritable_properties_List"/>
+  </complexType>
+ </element>
+ <element name="flow-target-list">
+  <complexType>
+   <sequence>
+    <element ref="fo:region-name-specifier" maxOccurs="unbounded"/>
+   </sequence>
+   <attributeGroup ref="fo:inheritable_properties_List"/>
+  </complexType>
+ </element>
+ <element name="layout-master-set">
+  <complexType>
+   <choice maxOccurs="unbounded">
+    <element ref="fo:simple-page-master"/>
+    <element ref="fo:page-sequence-master"/>
+   </choice>
+   <attributeGroup ref="fo:inheritable_properties_List"/>
+  </complexType>
+ </element>
+ <element name="page-sequence">
+  <complexType>
+   <sequence>
+    <element ref="fo:title" minOccurs="0"/>
+    <element ref="fo:static-content" maxOccurs="unbounded" minOccurs="0"/>
+    <element ref="fo:flow"/>
+   </sequence>
+   <attributeGroup ref="fo:inheritable_properties_List"/>
+   <attribute name="format" type="xs:string"/>
+   <attribute name="letter-value" type="fo:letter_value_Type"/>
+   <attribute name="grouping-separator" type="fo:character_Type"/>
+   <attribute name="grouping-size" type="fo:integer_Type"/>
+   <attribute name="id" type="xs:string"/>
+   <attribute name="initial-page-number" type="fo:integer_Type"/>
+   <attribute name="force-page-count" type="fo:force_page_count_Type"/>
+   <attribute name="master-reference" use="required" type="xs:string"/>
+  </complexType>
+ </element>
+ <element name="page-sequence-master">
+  <complexType>
+   <choice maxOccurs="unbounded">
+    <element ref="fo:single-page-master-reference"/>
+    <element ref="fo:repeatable-page-master-reference"/>
+    <element ref="fo:repeatable-page-master-alternatives"/>
+   </choice>
+   <attributeGroup ref="fo:inheritable_properties_List"/>
+   <attribute name="master-name" use="required" type="xs:string"/>
+  </complexType>
+ </element>
+ <element name="region-after">
+  <complexType>
+   <attributeGroup ref="fo:inheritable_properties_List"/>
+   <attributeGroup ref="fo:Border_Padding_and_Background_Properties_List"/>
+   <attributeGroup ref="fo:reference_Properties_List"/>
+   <attributeGroup ref="fo:clip_Properties_List"/>
+   <attribute name="extent" type="fo:extent_Type"/>
+   <attribute name="overflow" type="fo:overflow_Type"/>
+   <attribute name="precedence" type="fo:precedence_Type"/>
+   <attribute name="region-name" type="xs:string"/>
+  </complexType>
+ </element>
+ <element name="region-before">
+  <complexType>
+   <attributeGroup ref="fo:inheritable_properties_List"/>
+   <attributeGroup ref="fo:Border_Padding_and_Background_Properties_List"/>
+   <attributeGroup ref="fo:reference_Properties_List"/>
+   <attributeGroup ref="fo:clip_Properties_List"/>
+   <attribute name="extent" type="fo:extent_Type"/>
+   <attribute name="overflow" type="fo:overflow_Type"/>
+   <attribute name="precedence" type="fo:precedence_Type"/>
+   <attribute name="region-name" type="xs:string"/>
+  </complexType>
+ </element>
+ <element name="region-body">
+  <complexType>
+   <attributeGroup ref="fo:inheritable_properties_List"/>
+   <attributeGroup ref="fo:Margin_Properties_Block_List"/>
+   <attributeGroup ref="fo:Border_Padding_and_Background_Properties_List"/>
+   <attributeGroup ref="fo:reference_Properties_List"/>
+   <attributeGroup ref="fo:clip_Properties_List"/>
+   <attribute name="column-count" type="fo:integer_Type"/>
+   <attribute name="column-gap" type="fo:length_Type"/>
+   <attribute name="overflow" type="fo:overflow_Type"/>
+   <attribute name="region-name" type="xs:string"/>
+  </complexType>
+ </element>
+ <element name="region-end">
+  <complexType>
+   <attributeGroup ref="fo:inheritable_properties_List"/>
+   <attributeGroup ref="fo:Border_Padding_and_Background_Properties_List"/>
+   <attributeGroup ref="fo:reference_Properties_List"/>
+   <attributeGroup ref="fo:clip_Properties_List"/>
+   <attribute name="extent" type="fo:extent_Type"/>
+   <attribute name="overflow" type="fo:overflow_Type"/>
+   <attribute name="region-name" type="xs:string"/>
+   <attribute name="precedence" type="fo:precedence_Type"/>
+  </complexType>
+ </element>
+ <element name="region-name-specifier">
+  <complexType>
+   <attribute name="region-name-reference" type="xs:string"/>
+  </complexType>
+ </element>
+ <element name="region-start">
+  <complexType>
+   <attributeGroup ref="fo:inheritable_properties_List"/>
+   <attributeGroup ref="fo:Border_Padding_and_Background_Properties_List"/>
+   <attributeGroup ref="fo:reference_Properties_List"/>
+   <attributeGroup ref="fo:clip_Properties_List"/>
+   <attribute name="extent" type="fo:extent_Type"/>
+   <attribute name="overflow" type="fo:overflow_Type"/>
+   <attribute name="region-name" type="xs:string"/>
+   <attribute name="precedence" type="fo:precedence_Type"/>
+  </complexType>
+ </element>
+ <element name="repeatable-page-master-alternatives">
+  <complexType>
+   <sequence>
+    <element ref="fo:conditional-page-master-reference" maxOccurs="unbounded"/>
+   </sequence>
+   <attributeGroup ref="fo:inheritable_properties_List"/>
+   <attribute name="maximum-repeats" type="fo:integer_Type"/>
+  </complexType>
+ </element>
+ <element name="repeatable-page-master-reference">
+  <complexType>
+   <attributeGroup ref="fo:inheritable_properties_List"/>
+   <attribute name="maximum-repeats" type="fo:integer_Type"/>
+   <attribute name="master-reference" use="required" type="xs:string"/>
+  </complexType>
+ </element>
+ <element name="root">
+  <complexType>
+   <sequence>
+    <element ref="fo:layout-master-set"/>
+    <element ref="fo:declarations" minOccurs="0"/>
+    <element ref="fo:page-sequence" maxOccurs="unbounded"/>
+   </sequence>
+   <attributeGroup ref="fo:inheritable_properties_List"/>
+   <attribute name="media-usage" type="fo:media_usage_Type"/>
+  </complexType>
+ </element>
+ <element name="simple-page-master">
+  <complexType>
+   <sequence>
+    <element ref="fo:region-before" minOccurs="0"/>
+    <element ref="fo:region-after" minOccurs="0"/>
+    <element ref="fo:region-start" minOccurs="0"/>
+    <element ref="fo:region-end" minOccurs="0"/>
+    <element ref="fo:region-body"/>
+   </sequence>
+   <attributeGroup ref="fo:inheritable_properties_List"/>
+   <attributeGroup ref="fo:Margin_Properties_Block_List"/>
+   <attributeGroup ref="fo:reference_Properties_List"/>
+   <attribute name="page-height" type="fo:length_Type"/>
+   <attribute name="page-width" type="fo:length_Type"/>
+   <attribute name="master-name" use="required" type="xs:string"/>
+  </complexType>
+ </element>
+ <element name="single-page-master-reference">
+  <complexType>
+   <attributeGroup ref="fo:inheritable_properties_List"/>
+   <attribute name="master-reference" use="required" type="xs:string"/>
+  </complexType>
+ </element>
+ <element name="static-content">
+  <complexType>
+   <choice maxOccurs="unbounded">
+    <group ref="fo:block_List"/>
+    <group ref="fo:neutral_List"/>
+    <group ref="fo:float_List"/>
+    <group ref="fo:footnote_List"/>
+   </choice>
+   <attributeGroup ref="fo:inheritable_properties_List"/>
+   <attribute name="flow-name" use="required" type="xs:string"/>
+  </complexType>
+ </element>
+ <element name="title">
+  <complexType mixed="true">
+   <choice maxOccurs="unbounded" minOccurs="0">
+    <group ref="fo:inline_List"/>
+    <group ref="fo:neutral_List"/>
+   </choice>
+   <attributeGroup ref="fo:inheritable_properties_List"/>
+   <attributeGroup ref="fo:Accessibility_Properties_List"/>
+   <attributeGroup ref="fo:Aural_Properties_List"/>
+   <attributeGroup ref="fo:Border_Padding_and_Background_Properties_List"/>
+   <attributeGroup ref="fo:Font_Properties_List"/>
+   <attributeGroup ref="fo:Margin_Properties_Inline_List"/>
+  </complexType>
+ </element>
+ <element name="basic-link">
+  <complexType mixed="true">
+   <choice maxOccurs="unbounded" minOccurs="0">
+    <group ref="fo:inline_List"/>
+    <group ref="fo:block_List"/>
+    <group ref="fo:neutral_List"/>
+    <group ref="fo:marker_List"/>
+    <group ref="fo:float_List"/>
+    <group ref="fo:footnote_List"/>
+   </choice>
+   <attributeGroup ref="fo:inheritable_properties_List"/>
+   <attributeGroup ref="fo:Accessibility_Properties_List"/>
+   <attributeGroup ref="fo:Aural_Properties_List"/>
+   <attributeGroup ref="fo:Border_Padding_and_Background_Properties_List"/>
+   <attributeGroup ref="fo:Margin_Properties_Inline_List"/>
+   <attributeGroup ref="fo:Relative_Position_Properties_List"/>
+   <attributeGroup ref="fo:keep_Properties_List"/>
+   <attribute name="destination-placement-offset" type="fo:length_Type"/>
+   <attribute name="external-destination" type="xs:string"/>
+   <attribute name="id" type="xs:string"/>
+   <attribute name="indicate-destination" type="fo:indicate_destination_Type"/>
+   <attribute name="internal-destination" type="xs:string"/>
+   <attribute name="show-destination" type="fo:show_destination_Type"/>
+   <attribute name="target-processing-context" type="xs:string"/>
+   <attribute name="target-presentation-context" type="xs:string"/>
+   <attribute name="target-stylesheet" type="xs:string"/>
+   <attribute name="vertical-align" type="fo:vertical_align_Type"/>
+   <attribute name="alignment-adjust" type="fo:alignment_adjust_Type"/>
+   <attribute name="alignment-baseline" type="fo:alignment_baseline_Type"/>
+   <attribute name="baseline-shift" type="fo:baseline_shift_Type"/>
+   <attribute name="dominant-baseline" type="fo:dominant_baseline_Type"/>
+  </complexType>
+ </element>
+ <element name="list-block">
+  <complexType>
+   <sequence>
+    <element ref="fo:list-item" maxOccurs="unbounded"/>
+   </sequence>
+   <attributeGroup ref="fo:inheritable_properties_List"/>
+   <attributeGroup ref="fo:Accessibility_Properties_List"/>
+   <attributeGroup ref="fo:Aural_Properties_List"/>
+   <attributeGroup ref="fo:Border_Padding_and_Background_Properties_List"/>
+   <attributeGroup ref="fo:Margin_Properties_Block_List"/>
+   <attributeGroup ref="fo:Relative_Position_Properties_List"/>
+   <attributeGroup ref="fo:keep_Properties_List"/>
+   <attributeGroup ref="fo:break_Properties_List"/>
+   <attributeGroup ref="fo:intrusion_displace_Properties_List"/>
+   <attributeGroup ref="fo:list_properties"/>
+   <attribute name="id" type="xs:string"/>
+  </complexType>
+ </element>
+ <element name="list-item">
+  <complexType>
+   <sequence>
+    <element ref="fo:list-item-label"/>
+    <element ref="fo:list-item-body"/>
+   </sequence>
+   <attributeGroup ref="fo:inheritable_properties_List"/>
+   <attributeGroup ref="fo:Accessibility_Properties_List"/>
+   <attributeGroup ref="fo:Aural_Properties_List"/>
+   <attributeGroup ref="fo:Border_Padding_and_Background_Properties_List"/>
+   <attributeGroup ref="fo:Margin_Properties_Block_List"/>
+   <attributeGroup ref="fo:Relative_Position_Properties_List"/>
+   <attributeGroup ref="fo:intrusion_displace_Properties_List"/>
+   <attributeGroup ref="fo:break_Properties_List"/>
+   <attributeGroup ref="fo:keep_Properties_List"/>
+   <attributeGroup ref="fo:list_properties"/>
+   <attribute name="id" type="xs:string"/>
+  </complexType>
+ </element>
+ <element name="list-item-body">
+  <complexType>
+   <choice maxOccurs="unbounded">
+    <group ref="fo:block_List"/>
+    <group ref="fo:neutral_List"/>
+    <group ref="fo:marker_List"/>
+    <group ref="fo:float_List"/>
+    <group ref="fo:footnote_List"/>
+   </choice>
+   <attributeGroup ref="fo:inheritable_properties_List"/>
+   <attributeGroup ref="fo:Accessibility_Properties_List"/>
+   <attributeGroup ref="fo:list_properties"/>
+   <attribute name="id" type="xs:string"/>
+  </complexType>
+ </element>
+ <element name="list-item-label">
+  <complexType>
+   <choice maxOccurs="unbounded">
+    <group ref="fo:block_List"/>
+    <group ref="fo:neutral_List"/>
+    <group ref="fo:marker_List"/>
+    <group ref="fo:float_List"/>
+    <group ref="fo:footnote_List"/>
+   </choice>
+   <attributeGroup ref="fo:inheritable_properties_List"/>
+   <attributeGroup ref="fo:Accessibility_Properties_List"/>
+   <attributeGroup ref="fo:list_properties"/>
+   <attribute name="id" type="xs:string"/>
+  </complexType>
+ </element>
+ <element name="multi-case">
+  <complexType mixed="true">
+   <choice maxOccurs="unbounded" minOccurs="0">
+    <group ref="fo:inline_List"/>
+    <group ref="fo:block_List"/>
+    <group ref="fo:neutral_List"/>
+    <group ref="fo:float_List"/>
+    <group ref="fo:footnote_List"/>
+   </choice>
+   <attributeGroup ref="fo:inheritable_properties_List"/>
+   <attributeGroup ref="fo:Accessibility_Properties_List"/>
+   <attribute name="id" type="xs:string"/>
+   <attribute name="starting-state" type="fo:starting_state_Type"/>
+   <attribute name="case-name" type="xs:string"/>
+   <attribute name="case-title" type="xs:string"/>
+  </complexType>
+ </element>
+ <element name="multi-properties">
+  <complexType>
+   <sequence>
+    <element ref="fo:multi-property-set" maxOccurs="unbounded"/>
+    <element ref="fo:wrapper"/>
+   </sequence>
+   <attributeGroup ref="fo:inheritable_properties_List"/>
+   <attributeGroup ref="fo:Accessibility_Properties_List"/>
+   <attribute name="id" type="xs:string"/>
+  </complexType>
+ </element>
+ <element name="multi-property-set">
+  <complexType>
+   <attributeGroup ref="fo:inheritable_properties_List"/>
+   <attribute name="id" type="xs:string"/>
+   <attribute name="active-state" use="required" type="fo:active_state_Type"/>
+  </complexType>
+ </element>
+ <element name="multi-switch">
+  <complexType>
+   <sequence>
+    <element ref="fo:multi-case"/>
+   </sequence>
+   <attributeGroup ref="fo:inheritable_properties_List"/>
+   <attributeGroup ref="fo:Accessibility_Properties_List"/>
+   <attribute name="id" type="xs:string"/>
+  </complexType>
+ </element>
+ <element name="multi-toggle">
+  <complexType mixed="true">
+   <choice maxOccurs="unbounded" minOccurs="0">
+    <group ref="fo:inline_List"/>
+    <group ref="fo:block_List"/>
+    <group ref="fo:neutral_List"/>
+    <group ref="fo:float_List"/>
+    <group ref="fo:footnote_List"/>
+   </choice>
+   <attributeGroup ref="fo:inheritable_properties_List"/>
+   <attributeGroup ref="fo:Accessibility_Properties_List"/>
+   <attribute name="id" type="xs:string"/>
+   <attribute name="switch-to" type="xs:string"/>
+   <attribute name="vertical-align" type="fo:vertical_align_Type"/>
+  </complexType>
+ </element>
+ <element name="marker">
+  <complexType mixed="true">
+   <choice maxOccurs="unbounded" minOccurs="0">
+    <group ref="fo:block_List"/>
+    <group ref="fo:inline_List"/>
+   </choice>
+   <attributeGroup ref="fo:inheritable_properties_List"/>
+   <attribute name="marker-class-name" type="xs:string"/>
+  </complexType>
+ </element>
+ <element name="retrieve-marker">
+  <complexType>
+   <attributeGroup ref="fo:inheritable_properties_List"/>
+   <attribute name="retrieve-class-name" type="xs:string"/>
+   <attribute name="retrieve-position" type="fo:retrieve_position_Type"/>
+   <attribute name="retrieve-boundary" type="fo:retrieve_boundary_Type"/>
+  </complexType>
+ </element>
+ <element name="wrapper">
+  <complexType mixed="true">
+   <choice maxOccurs="unbounded" minOccurs="0">
+    <group ref="fo:inline_List"/>
+    <group ref="fo:block_List"/>
+    <group ref="fo:neutral_List"/>
+    <group ref="fo:marker_List"/>
+    <group ref="fo:float_List"/>
+    <group ref="fo:footnote_List"/>
+   </choice>
+   <attributeGroup ref="fo:inheritable_properties_List"/>
+   <attribute name="id" type="xs:string"/>
+  </complexType>
+ </element>
+ <element name="float">
+  <complexType>
+   <choice maxOccurs="unbounded">
+    <group ref="fo:block_List"/>
+    <group ref="fo:neutral_List"/>
+    <group ref="fo:footnote_List"/>
+    <group ref="fo:float_List"/>
+   </choice>
+   <attributeGroup ref="fo:inheritable_properties_List"/>
+   <attribute name="float" type="fo:float_Type"/>
+   <attribute name="clear" type="fo:clear_Type"/>
+  </complexType>
+ </element>
+ <element name="footnote">
+  <complexType>
+   <sequence>
+    <element ref="fo:inline"/>
+    <element ref="fo:footnote-body"/>
+   </sequence>
+   <attributeGroup ref="fo:inheritable_properties_List"/>
+   <attributeGroup ref="fo:Accessibility_Properties_List"/>
+  </complexType>
+ </element>
+ <element name="footnote-body">
+  <complexType>
+   <choice maxOccurs="unbounded">
+    <group ref="fo:block_List"/>
+    <group ref="fo:neutral_List"/>
+    <group ref="fo:float_List"/>
+    <group ref="fo:footnote_List"/>
+   </choice>
+   <attributeGroup ref="fo:inheritable_properties_List"/>
+   <attributeGroup ref="fo:Accessibility_Properties_List"/>
+  </complexType>
+ </element>
+ <element name="table">
+  <complexType>
+   <sequence>
+    <element ref="fo:table-column" maxOccurs="unbounded" minOccurs="0"/>
+    <element ref="fo:table-header" minOccurs="0"/>
+    <element ref="fo:table-footer" minOccurs="0"/>
+    <element ref="fo:table-body" maxOccurs="unbounded"/>
+   </sequence>
+   <attributeGroup ref="fo:inheritable_properties_List"/>
+   <attributeGroup ref="fo:Accessibility_Properties_List"/>
+   <attributeGroup ref="fo:Aural_Properties_List"/>
+   <attributeGroup ref="fo:Border_Padding_and_Background_Properties_List"/>
+   <attributeGroup ref="fo:Margin_Properties_Block_List"/>
+   <attributeGroup ref="fo:Relative_Position_Properties_List"/>
+   <attributeGroup ref="fo:block_properties"/>
+   <attributeGroup ref="fo:progression_Properties_List"/>
+   <attributeGroup ref="fo:keep_Properties_List"/>
+   <attributeGroup ref="fo:break_Properties_List"/>
+   <attributeGroup ref="fo:intrusion_displace_Properties_List"/>
+   <attribute name="border-after-precedence" type="fo:precedence_Type"/>
+   <attribute name="border-before-precedence" type="fo:precedence_Type"/>
+   <attribute name="border-end-precedence" type="fo:precedence_Type"/>
+   <attribute name="border-start-precedence" type="fo:precedence_Type"/>
+   <attribute name="id" type="xs:string"/>
+   <attribute name="height" type="fo:height_Type"/>
+   <attribute name="table-layout" type="fo:table_layout_Type"/>
+   <attribute name="table-omit-footer-at-break" type="fo:table_omit_footer_at_break_Type"/>
+   <attribute name="table-omit-header-at-break" type="fo:table_omit_header_at_break_Type"/>
+   <attribute name="width" type="fo:height_Type"/>
+  </complexType>
+ </element>
+ <element name="table-and-caption">
+  <complexType>
+   <sequence>
+    <element ref="fo:table-caption" minOccurs="0"/>
+    <element ref="fo:table"/>
+   </sequence>
+   <attributeGroup ref="fo:inheritable_properties_List"/>
+   <attributeGroup ref="fo:Accessibility_Properties_List"/>
+   <attributeGroup ref="fo:Aural_Properties_List"/>
+   <attributeGroup ref="fo:Border_Padding_and_Background_Properties_List"/>
+   <attributeGroup ref="fo:Margin_Properties_Block_List"/>
+   <attributeGroup ref="fo:Relative_Position_Properties_List"/>
+   <attributeGroup ref="fo:block_properties"/>
+   <attributeGroup ref="fo:keep_Properties_List"/>
+   <attributeGroup ref="fo:break_Properties_List"/>
+   <attributeGroup ref="fo:intrusion_displace_Properties_List"/>
+   <attribute name="id" type="xs:string"/>
+  </complexType>
+ </element>
+ <element name="table-body">
+  <complexType>
+   <choice>
+    <element ref="fo:table-row" maxOccurs="unbounded"/>
+    <element ref="fo:table-cell" maxOccurs="unbounded"/>
+   </choice>
+   <attributeGroup ref="fo:inheritable_properties_List"/>
+   <attributeGroup ref="fo:Accessibility_Properties_List"/>
+   <attributeGroup ref="fo:Aural_Properties_List"/>
+   <attributeGroup ref="fo:Relative_Position_Properties_List"/>
+   <attributeGroup ref="fo:Border_Properties_List"/>
+   <attributeGroup ref="fo:Background_Properties_List"/>
+   <attribute name="border-after-precedence" type="fo:precedence_Type"/>
+   <attribute name="border-before-precedence" type="fo:precedence_Type"/>
+   <attribute name="border-end-precedence" type="fo:precedence_Type"/>
+   <attribute name="border-start-precedence" type="fo:precedence_Type"/>
+   <attribute name="id" type="xs:string"/>
+  </complexType>
+ </element>
+ <element name="table-caption">
+  <complexType>
+   <choice maxOccurs="unbounded">
+    <group ref="fo:block_List"/>
+    <group ref="fo:neutral_List"/>
+    <group ref="fo:marker_List"/>
+    <group ref="fo:float_List"/>
+    <group ref="fo:footnote_List"/>
+   </choice>
+   <attributeGroup ref="fo:inheritable_properties_List"/>
+   <attributeGroup ref="fo:Accessibility_Properties_List"/>
+   <attributeGroup ref="fo:Aural_Properties_List"/>
+   <attributeGroup ref="fo:Border_Padding_and_Background_Properties_List"/>
+   <attributeGroup ref="fo:Relative_Position_Properties_List"/>
+   <attributeGroup ref="fo:progression_Properties_List"/>
+   <attributeGroup ref="fo:intrusion_displace_Properties_List"/>
+   <attribute name="height" type="fo:height_Type"/>
+   <attribute name="id" type="xs:string"/>
+   <attribute name="width" type="fo:height_Type"/>
+  </complexType>
+ </element>
+ <element name="table-cell">
+  <complexType>
+   <choice maxOccurs="unbounded">
+    <group ref="fo:block_List"/>
+    <group ref="fo:neutral_List"/>
+    <group ref="fo:marker_List"/>
+    <group ref="fo:float_List"/>
+    <group ref="fo:footnote_List"/>
+   </choice>
+   <attributeGroup ref="fo:inheritable_properties_List"/>
+   <attributeGroup ref="fo:Accessibility_Properties_List"/>
+   <attributeGroup ref="fo:Aural_Properties_List"/>
+   <attributeGroup ref="fo:Border_Padding_and_Background_Properties_List"/>
+   <attributeGroup ref="fo:Relative_Position_Properties_List"/>
+   <attributeGroup ref="fo:progression_Properties_List"/>
+   <attribute name="border-after-precedence" type="fo:precedence_Type"/>
+   <attribute name="border-before-precedence" type="fo:precedence_Type"/>
+   <attribute name="border-end-precedence" type="fo:precedence_Type"/>
+   <attribute name="border-start-precedence" type="fo:precedence_Type"/>
+   <attribute name="column-number" type="fo:integer_Type"/>
+   <attribute name="ends-row" type="fo:ends_row_Type"/>
+   <attribute name="height" type="fo:height_Type"/>
+   <attribute name="id" type="xs:string"/>
+   <attribute name="number-columns-spanned" type="fo:integer_Type"/>
+   <attribute name="number-rows-spanned" type="fo:integer_Type"/>
+   <attribute name="starts-row" type="fo:starts_row_Type"/>
+   <attribute name="width" type="fo:height_Type"/>
+   <attribute name="vertical-align" type="fo:vertical_align_Type"/>
+  </complexType>
+ </element>
+ <element name="table-column">
+  <complexType>
+   <attributeGroup ref="fo:inheritable_properties_List"/>
+   <attributeGroup ref="fo:Border_Properties_List"/>
+   <attributeGroup ref="fo:Background_Properties_List"/>
+   <attribute name="border-after-precedence" type="fo:precedence_Type"/>
+   <attribute name="border-before-precedence" type="fo:precedence_Type"/>
+   <attribute name="border-end-precedence" type="fo:precedence_Type"/>
+   <attribute name="border-start-precedence" type="fo:precedence_Type"/>
+   <attribute name="column-number" type="fo:integer_Type"/>
+   <attribute name="column-width" type="fo:column_width_Type"/>
+   <attribute name="number-columns-repeated" type="fo:integer_Type"/>
+   <attribute name="number-columns-spanned" type="fo:integer_Type"/>
+  </complexType>
+ </element>
+ <element name="table-footer">
+  <complexType>
+   <choice>
+    <element ref="fo:table-row" maxOccurs="unbounded"/>
+    <element ref="fo:table-cell" maxOccurs="unbounded"/>
+   </choice>
+   <attributeGroup ref="fo:inheritable_properties_List"/>
+   <attributeGroup ref="fo:Accessibility_Properties_List"/>
+   <attributeGroup ref="fo:Aural_Properties_List"/>
+   <attributeGroup ref="fo:Relative_Position_Properties_List"/>
+   <attributeGroup ref="fo:Border_Properties_List"/>
+   <attributeGroup ref="fo:Background_Properties_List"/>
+   <attribute name="border-after-precedence" type="fo:precedence_Type"/>
+   <attribute name="border-before-precedence" type="fo:precedence_Type"/>
+   <attribute name="border-end-precedence" type="fo:precedence_Type"/>
+   <attribute name="border-start-precedence" type="fo:precedence_Type"/>
+   <attribute name="id" type="xs:string"/>
+  </complexType>
+ </element>
+ <element name="table-header">
+  <complexType>
+   <choice>
+    <element ref="fo:table-row" maxOccurs="unbounded"/>
+    <element ref="fo:table-cell" maxOccurs="unbounded"/>
+   </choice>
+   <attributeGroup ref="fo:inheritable_properties_List"/>
+   <attributeGroup ref="fo:Accessibility_Properties_List"/>
+   <attributeGroup ref="fo:Aural_Properties_List"/>
+   <attributeGroup ref="fo:Relative_Position_Properties_List"/>
+   <attributeGroup ref="fo:Border_Properties_List"/>
+   <attributeGroup ref="fo:Background_Properties_List"/>
+   <attribute name="border-after-precedence" type="fo:precedence_Type"/>
+   <attribute name="border-before-precedence" type="fo:precedence_Type"/>
+   <attribute name="border-end-precedence" type="fo:precedence_Type"/>
+   <attribute name="border-start-precedence" type="fo:precedence_Type"/>
+   <attribute name="id" type="xs:string"/>
+  </complexType>
+ </element>
+ <element name="table-row">
+  <complexType>
+   <sequence>
+    <element ref="fo:table-cell" maxOccurs="unbounded"/>
+   </sequence>
+   <attributeGroup ref="fo:inheritable_properties_List"/>
+   <attributeGroup ref="fo:Accessibility_Properties_List"/>
+   <attributeGroup ref="fo:Aural_Properties_List"/>
+   <attributeGroup ref="fo:Relative_Position_Properties_List"/>
+   <attributeGroup ref="fo:Border_Properties_List"/>
+   <attributeGroup ref="fo:Background_Properties_List"/>
+   <attributeGroup ref="fo:keep_Properties_List"/>
+   <attributeGroup ref="fo:break_Properties_List"/>
+   <attribute name="block-progression-dimension" type="fo:margin_width_Type"/>
+   <attribute name="block-progression-dimension.minimum" type="fo:length_Type"/>
+   <attribute name="block-progression-dimension.optimum" type="fo:block_progression_dimension_optimum_Type"/>
+   <attribute name="block-progression-dimension.maximum" type="fo:block_progression_dimension_maximum_Type"/>
+   <attribute name="border-after-precedence" type="fo:precedence_Type"/>
+   <attribute name="border-before-precedence" type="fo:precedence_Type"/>
+   <attribute name="border-end-precedence" type="fo:precedence_Type"/>
+   <attribute name="border-start-precedence" type="fo:precedence_Type"/>
+   <attribute name="id" type="xs:string"/>
+   <attribute name="height" type="fo:height_Type"/>
+   <attribute name="page-break-after" type="fo:page_break_after_Type"/>
+   <attribute name="page-break-before" type="fo:page_break_after_Type"/>
+  </complexType>
+ </element>
+ <simpleType name="name_Type">
+  <restriction base="string">
+   <pattern value=".*"/>
+  </restriction>
+ </simpleType>
+ <simpleType name="font_variant_Type">
+  <restriction base="string">
+   <enumeration value="normal"/>
+   <enumeration value="small-caps"/>
+   <enumeration value="inherit"/>
+  </restriction>
+ </simpleType>
+</schema>

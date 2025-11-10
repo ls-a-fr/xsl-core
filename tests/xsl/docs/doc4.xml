@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<fo:root xmlns:fo="http://www.w3.org/1999/XSL/Format">
+    <fo:layout-master-set>
+        <fo:simple-page-master master-name="two-regions"
+            page-height="29.7cm"
+            page-width="21cm"
+            margin="2cm">
+            <fo:region-body />
+            <fo:region-after extent="1.5cm" />
+        </fo:simple-page-master>
+    </fo:layout-master-set>
+
+    <fo:page-sequence master-reference="two-regions">
+        <fo:flow flow-name="xsl-region-body">
+            <fo:block font-family="serif" font-size="11pt">
+                Un fichier XSL-FO commence par une racine contenant des modèles de pages et des
+                séquences de pages.
+            </fo:block>
+        </fo:flow>
+        <fo:static-content flow-name="xsl-region-after">
+            <fo:block font-size="8pt" text-align="center">
+                Pied de page statique
+            </fo:block>
+        </fo:static-content>
+    </fo:page-sequence>
+</fo:root>

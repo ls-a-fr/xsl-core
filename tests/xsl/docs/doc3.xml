@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<fo:root xmlns:fo="http://www.w3.org/1999/XSL/Format">
+    <fo:layout-master-set>
+        <fo:simple-page-master master-name="default"
+            page-height="29.7cm"
+            page-width="21cm"
+            margin="2cm">
+            <fo:region-body />
+        </fo:simple-page-master>
+    </fo:layout-master-set>
+
+    <fo:page-sequence master-reference="default">
+        <fo:flow flow-name="xsl-region-body">
+            <fo:block>
+                La spécification XSL inclut XSLT pour la transformation, et XSL-FO pour le
+                formatage.
+            </fo:block>
+            <fo:block>
+                XSL-FO définit des objets de mise en page tels que blocs, tables, listes, et régions
+                de page.
+            </fo:block>
+            <fo:block>
+                <fo:basic-link external-destination="url('http://nonexistant-link.test')">
+                    Lien vers ressource non disponible
+                </fo:basic-link>
+            </fo:block>
+        </fo:flow>
+    </fo:page-sequence>
+</fo:root>

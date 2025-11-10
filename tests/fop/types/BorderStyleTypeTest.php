@@ -1,0 +1,39 @@
+<?php
+
+declare(strict_types=1);
+
+namespace Lsa\Xsl\Core\Tests\Fop\Types;
+
+use Lsa\Xml\Utils\Xml\XmlComparator;
+use Lsa\Xsl\Core\Tests\Fop\CommonMethodsFop;
+use Lsa\Xsl\Core\Tests\Providers\BorderStyleDataProvider;
+use Lsa\Xsl\Core\Validation\Types\BorderStyleType;
+use PHPUnit\Framework\Attributes\DataProviderExternal;
+
+final class BorderStyleTypeTest extends CommonMethodsFop
+{
+    public function test_schema(): void
+    {
+        $comparator = new XmlComparator(XmlComparator::VALIDATION_STRICT | XmlComparator::VALIDATION_SWAPPABLE_ATTRIBUTE_VALUES);
+        $xsd = self::$xsdElement->xpath('/x:schema/x:simpleType[@name="border_style_Type"]');
+        $fop = self::$fopElement->xpath('/x:schema/x:simpleType[@name="border_style_Type"]');
+
+        $this->assertNotEmpty($xsd);
+        $this->assertNotEmpty($fop);
+
+        $result = $comparator->compareNodes($fop, $xsd);
+        $this->assertTrue($result, implode("\n", $comparator->getErrors()));
+    }
+
+    #[DataProviderExternal(BorderStyleDataProvider::class, 'validDataProvider')]
+    public function test_validation_with_valid_values(mixed $value): void
+    {
+        $this->validValue(BorderStyleType::class, $value);
+    }
+
+    #[DataProviderExternal(BorderStyleDataProvider::class, 'invalidDataProvider')]
+    public function test_validation_with_invalid_values(mixed $value): void
+    {
+        $this->invalidValue(BorderStyleType::class, $value);
+    }
+}

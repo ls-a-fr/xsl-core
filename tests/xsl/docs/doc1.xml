@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<fo:root xmlns:fo="http://www.w3.org/1999/XSL/Format">
+  <fo:layout-master-set>
+    <fo:simple-page-master master-name="simple"
+                           page-height="29.7cm"
+                           page-width="21cm"
+                           margin="2cm">
+      <fo:region-body/>
+    </fo:simple-page-master>
+  </fo:layout-master-set>
+
+  <fo:page-sequence master-reference="simple">
+    <fo:flow flow-name="xsl-region-body">
+      <fo:block font-size="12pt" line-height="14pt">
+        XSL-FO (Extensible Stylesheet Language Formatting Objects) est un langage XML utilisé pour décrire la mise en page de documents imprimés.
+      </fo:block>
+      <fo:block>
+        Il est couramment utilisé avec XSLT pour transformer des données XML en fichiers imprimables via des outils comme Apache FOP.
+      </fo:block>
+      <fo:block>
+        <fo:basic-link external-destination="url('http://exemple.com/xsl-fo-docs')">
+          Documentation XSL-FO
+        </fo:basic-link>
+      </fo:block>
+    </fo:flow>
+  </fo:page-sequence>
+</fo:root>

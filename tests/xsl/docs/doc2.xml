@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<fo:root xmlns:fo="http://www.w3.org/1999/XSL/Format">
+    <fo:layout-master-set>
+        <fo:simple-page-master master-name="onecol"
+            page-width="21cm"
+            page-height="29.7cm"
+            margin="1.5cm">
+            <fo:region-body margin-top="2cm" />
+        </fo:simple-page-master>
+    </fo:layout-master-set>
+
+    <fo:page-sequence master-reference="onecol">
+        <fo:flow flow-name="xsl-region-body">
+            <fo:block font-size="10pt">
+                Couleurs de base :
+            </fo:block>
+            <fo:list-block provisional-distance-between-starts="1cm">
+                <fo:list-item>
+                    <fo:list-item-label end-indent="label-end()">
+                        <fo:block>•</fo:block>
+                    </fo:list-item-label>
+                    <fo:list-item-body start-indent="body-start()">
+                        <fo:block>Rouge</fo:block>
+                    </fo:list-item-body>
+                </fo:list-item>
+                <fo:list-item>
+                    <fo:list-item-label end-indent="label-end()">
+                        <fo:block>•</fo:block>
+                    </fo:list-item-label>
+                    <fo:list-item-body start-indent="body-start()">
+                        <fo:block>Vert</fo:block>
+                    </fo:list-item-body>
+                </fo:list-item>
+                <fo:list-item>
+                    <fo:list-item-label end-indent="label-end()">
+                        <fo:block>•</fo:block>
+                    </fo:list-item-label>
+                    <fo:list-item-body start-indent="body-start()">
+                        <fo:block>Bleu</fo:block>
+                    </fo:list-item-body>
+                </fo:list-item>
+            </fo:list-block>
+        </fo:flow>
+    </fo:page-sequence>
+</fo:root>

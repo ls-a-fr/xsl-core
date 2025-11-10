@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<fo:root xmlns:fo="http://www.w3.org/1999/XSL/Format">
+  <fo:layout-master-set>
+    <fo:simple-page-master master-name="margins"
+                           page-width="21cm"
+                           page-height="29.7cm"
+                           margin-top="3cm"
+                           margin-bottom="3cm"
+                           margin-left="2cm"
+                           margin-right="2cm">
+      <fo:region-body/>
+    </fo:simple-page-master>
+  </fo:layout-master-set>
+
+  <fo:page-sequence master-reference="margins">
+    <fo:flow flow-name="xsl-region-body">
+      <fo:block>
+        Exemple simple de mise en forme à marges personnalisées.
+      </fo:block>
+      <fo:block>
+        XSL-FO est souvent utilisé pour générer des fichiers PDF.
+      </fo:block>
+      <fo:block>
+        <fo:basic-link external-destination="url('http://invalid.example.org')">
+          Voir la page d'information
+        </fo:basic-link>
+      </fo:block>
+    </fo:flow>
+  </fo:page-sequence>
+</fo:root>
