@@ -1,6 +1,6 @@
 # XSL Core
 
-Cette documentation est également disponible en :
+This documentation is also available in these languages:
 - [Français](docs/LISEZMOI.md)
 
 This library provides a simple and readable interface for easily generating and validating your XSL-FO documents.
