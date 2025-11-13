@@ -112,7 +112,7 @@ shell_exec('fop mon-document.fo mon-pdf.pdf');
 
 ## Installation
 
-Ce package sera (bientôt) disponible sur Composer. Pour l'installer :
+Ce package est disponible sur Composer. Pour l'installer :
 ```sh
 composer require ls-a/xsl-core
 ```
