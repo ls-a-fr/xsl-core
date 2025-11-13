@@ -22,6 +22,11 @@ class LabelEndFunction extends XslFunction
         return 'label-end';
     }
 
+    /**
+     * Gets this function parameters
+     *
+     * @return list<array<self::MODE_*,self::TYPE_*>>
+     */
     public static function getParameters(): array
     {
         return [];

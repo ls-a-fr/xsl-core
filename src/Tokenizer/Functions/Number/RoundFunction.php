@@ -24,6 +24,11 @@ class RoundFunction extends XslFunction
         return 'round';
     }
 
+    /**
+     * Gets this function parameters
+     *
+     * @return list<array<self::MODE_*,self::TYPE_*>>
+     */
     public static function getParameters(): array
     {
         return [
@@ -36,7 +41,10 @@ class RoundFunction extends XslFunction
         if (UnitConverter::make()->hasUnit($args[0]) === true) {
             throw new InvalidAttributeValueParseException('Round function must have no unit power');
         }
-        if (\is_numeric($args[0]) === false || \str_ends_with($args[0], '.') === true) {
+        if (
+            \is_string($args[0]) === true
+            && (\is_numeric($args[0]) === false || \str_ends_with($args[0], '.') === true)
+        ) {
             throw new InvalidFunctionTokenException('Argument in abs() function must be numeric, found: '.$args[0]);
         }
 

@@ -28,6 +28,11 @@ class FloorFunction extends XslFunction
         return 'floor';
     }
 
+    /**
+     * Gets this function parameters
+     *
+     * @return list<array<self::MODE_*,self::TYPE_*>>
+     */
     public static function getParameters(): array
     {
         return [

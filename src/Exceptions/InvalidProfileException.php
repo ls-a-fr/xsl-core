@@ -9,4 +9,4 @@ use Exception;
 /**
  * This exception is raised when an invalid profile is selected.
  */
-class InvalidProfileException extends Exception {}
+class InvalidProfileException extends XslCoreException {}

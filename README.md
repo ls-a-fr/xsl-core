@@ -33,15 +33,15 @@ $root = (new Root())
                     new Attribute('font-size', '12pt'),
                     new Attribute('line-height', '14pt'),
                 ])
-                ->content('XSL-FO (Extensible Stylesheet Language Formatting Objects) est un langage XML utilisé pour décrire la mise en page de documents imprimés.')
+                ->content('XSL-FO (Extensible Stylesheet Language Formatting Objects) is an XML language used to describe the layout of printed documents.')
             )
             ->child((new Block())
-                ->content('Il est couramment utilisé avec XSLT pour transformer des données XML en fichiers imprimables via des outils comme Apache FOP.')
+                ->content('It is commonly used with XSLT to transform XML data into printable files using tools such as Apache FOP.')
             )
             ->child((new Block())
                 ->child((new BasicLink())
                     ->attribute(new Attribute('external-destination', "url('http://exemple.com/xsl-fo-docs')"))
-                    ->content('Documentation XSL-FO')
+                    ->content('FOP documentation')
                 )
             )
         )
@@ -112,10 +112,10 @@ $root = (new Root())
     ->namespace($foNamespace);
 
 // Write in a file
-file_put_contents('mon-document.fo', $root->asXml());
+file_put_contents('my-document.fo', $root->asXml());
 
 // Call Apache FOP, with any mean you wish to
-shell_exec('fop mon-document.fo mon-pdf.pdf');
+shell_exec('fop my-document.fo my-pdf.pdf');
 ```
 
 ## Installation
@@ -127,7 +127,7 @@ composer require ls-a/xsl-core
 
 ## Changelog
 
-Please refer to the [CHANGELOG.md](CHANGELOG) file to see the latest changes.
+Please refer to the [CHANGELOG](CHANGELOG.md) file to see the latest changes.
 
 ## Support
 
@@ -135,7 +135,7 @@ We put our heart into delivering high-quality products that are accessible to ev
 
 ## Contributing
 
-Contributions are governed by the CONTRIBUTING file.
+Contributions are governed by the [CONTRIBUTING](https://github.com/ls-a-fr/.github/CONTRIBUTING.md) file.
 
 ## Security
 

@@ -66,7 +66,6 @@
         <exclude name="PEAR.Commenting.FunctionComment"/>
         <!-- Superseeded by PSR12.ControlStructures.ControlStructureSpacing-->
         <exclude name="PEAR.ControlStructures.MultiLineCondition.StartWithBoolean" />
-        <!-- TODO Use PHP CS Fixer to add header to every file -->
         <exclude name="PEAR.Commenting.FileComment" />
         <exclude name="PEAR.Commenting.ClassComment.MissingCategoryTag"/>
         <exclude name="PEAR.Commenting.ClassComment.MissingPackageTag"/>

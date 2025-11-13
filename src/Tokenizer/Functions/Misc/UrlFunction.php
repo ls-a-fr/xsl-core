@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Lsa\Xsl\Core\Tokenizer\Functions\Misc;
 
 use Lsa\Arithmetic\Ast\Exceptions\InvalidFunctionTokenException;
+use Lsa\Xsl\Core\Exceptions\InvalidAttributeValueParseException;
 use Lsa\Xsl\Core\Tokenizer\Functions\XslFunction;
 use Lsa\Xsl\Core\Validation\Types\Xsl\UriSpecificationType;
 
@@ -21,6 +22,11 @@ class UrlFunction extends XslFunction
         return 'url';
     }
 
+    /**
+     * Gets this function parameters
+     *
+     * @return list<array<self::MODE_*,self::TYPE_*>>
+     */
     public static function getParameters(): array
     {
         return [
@@ -30,6 +36,11 @@ class UrlFunction extends XslFunction
 
     public function evaluate(...$args): string|float
     {
+        if (\is_float($args[0]) === true) {
+            throw new InvalidAttributeValueParseException(
+                self::getFunctionName().'() expects string, float given'
+            );
+        }
         // Remove spaces if necessary
         $quotedUrl = \trim($args[0]);
         // Remove quotes for parse_url

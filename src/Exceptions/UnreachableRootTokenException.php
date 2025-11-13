@@ -9,4 +9,4 @@ use Exception;
 /**
  * This exception is raised when a function cannot access its root token.
  */
-class UnreachableRootTokenException extends Exception {}
+class UnreachableRootTokenException extends XslCoreException {}

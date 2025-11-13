@@ -9,4 +9,4 @@ use Exception;
 /**
  * This exception is raised when a validation cannot be done.
  */
-class ValidationException extends Exception {}
+class ValidationException extends XslCoreException {}

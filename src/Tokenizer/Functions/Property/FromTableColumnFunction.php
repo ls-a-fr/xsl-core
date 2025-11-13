@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Lsa\Xsl\Core\Tokenizer\Functions\Property;
 
 use Lsa\Xml\Utils\Collections\NodeCollection;
+use Lsa\Xml\Utils\Exceptions\PropertyNotFoundException;
 use Lsa\Xml\Utils\Validation\PropertyBank;
 use Lsa\Xml\Utils\Validation\TypedAttribute;
 use Lsa\Xml\Utils\Xml\Base\EmptyTag;
@@ -20,7 +21,6 @@ use Lsa\Xsl\Core\Traits\DataAwareFunction;
 use Lsa\Xsl\Core\Traits\InheritableAttribute;
 use Lsa\Xsl\Core\Validation\Properties\ColumnNumber;
 use Lsa\Xsl\Core\Validation\Properties\NumberColumnsSpanned;
-use RuntimeException;
 
 /**
  * The from-table-column function returns the inherited value of the property whose name matches the argument
@@ -53,6 +53,11 @@ class FromTableColumnFunction extends XslFunction
         return 'from-table-column';
     }
 
+    /**
+     * Gets this function parameters
+     *
+     * @return list<array<self::MODE_*,self::TYPE_*>>
+     */
     public static function getParameters(): array
     {
         return [
@@ -60,14 +65,6 @@ class FromTableColumnFunction extends XslFunction
         ];
     }
 
-    /**
-     * Evaluates this function and returns a result based on given tokens.
-     *
-     * @param  string  ...$args  Arguments for this function
-     * @return string|float Evaluation result
-     *
-     * @throws InvalidAttributeValueParseException
-     */
     public function evaluate(...$args): string|float
     {
         $rootToken = $this->getRootToken();
@@ -75,9 +72,15 @@ class FromTableColumnFunction extends XslFunction
         $currentTag = $rootToken->tag;
         $tableCell = $this->findTableCell($currentTag);
 
+        if (\is_float($propertyName) === true) {
+            throw new InvalidAttributeValueParseException(
+                self::getFunctionName().'() expects string, float given'
+            );
+        }
+
         try {
             $property = PropertyBank::getOne($propertyName);
-        } catch (RuntimeException) {
+        } catch (PropertyNotFoundException) {
             throw new InvalidAttributeValueParseException('Property '.$propertyName.' not found');
         }
 
@@ -92,10 +95,7 @@ class FromTableColumnFunction extends XslFunction
             if (($column instanceof EmptyTag) === false) {
                 continue;
             }
-            $currentColumnNumber = $column->attributes->get('column-number');
-            if ($currentColumnNumber === null) {
-                $currentColumnNumber = (new ColumnNumber())->getDefaultValueWithContext($table, $tableCell);
-            }
+            $currentColumnNumber = $this->getCurrentColumnNumber($column, $table, $tableCell);
             if ($currentColumnNumber !== $cellColumnNumber) {
                 continue;
             }
@@ -109,6 +109,24 @@ class FromTableColumnFunction extends XslFunction
             return $this->fromProperty($property, $currentTag);
         }
         throw new InvalidAttributeValueParseException('Cannot find related TableColumn.');
+    }
+
+    /**
+     * Utility method to get current column number.
+     *
+     * @param  EmptyTag  $column  Current column
+     * @param  Tag  $table  Table tag
+     * @param  EmptyTag  $tableCell  Current table cell
+     * @return string Current column number, or default value
+     */
+    protected function getCurrentColumnNumber(EmptyTag $column, Tag $table, EmptyTag $tableCell): string
+    {
+        $currentColumnNumber = $column->attributes->get('column-number');
+        if ($currentColumnNumber === null) {
+            $currentColumnNumber = (new ColumnNumber())->getDefaultValueWithContext($table, $tableCell);
+        }
+
+        return $currentColumnNumber;
     }
 
     /**

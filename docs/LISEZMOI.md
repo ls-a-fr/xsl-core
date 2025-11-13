@@ -119,7 +119,7 @@ composer require ls-a/xsl-core
 
 ## Journal des modifications
 
-Veuillez consulter le fichier [CHANGELOG.md](CHANGELOG) pour voir les dernières modifications.
+Veuillez consulter le fichier [CHANGELOG](CHANGELOG.md) pour voir les dernières modifications.
 
 ## Support
 
@@ -127,7 +127,7 @@ Nous mettons du coeur à l'ouvrage pour proposer des produits de qualité et acc
 
 ## Contributions
 
-Les contributions sont régies par le fichier CONTRIBUTING.
+Les contributions sont régies par le fichier [CONTRIBUTING](https://github.com/ls-a-fr/.github/CONTRIBUTING.md).
 
 ## Sécurité
 

@@ -22,7 +22,9 @@ use Lsa\Xml\Utils\Xml\XmlNamespace;
 use Lsa\Xsd\Generator\Configuration\CustomType;
 use Lsa\Xsd\Generator\Configuration\InheritableConfiguration;
 use Lsa\Xsd\Generator\Finders\AttributeGroupFinder;
+use Lsa\Xsd\Generator\Finders\TagFinder;
 use Lsa\Xsd\Generator\Finders\TagGroupFinder;
+use Lsa\Xsd\Generator\Finders\TypeFinder;
 use Lsa\Xsd\Generator\Profiles\XsdProfile;
 use Lsa\Xsd\Generator\Tags\Attribute;
 use Lsa\Xsd\Generator\Tags\Type;
@@ -129,11 +131,10 @@ class XslProfile extends XsdProfile
     public function getFinders(): InheritableConfiguration
     {
         return new InheritableConfiguration(__FUNCTION__, [
-            // Tag Group finder (<group/>)
-            TagGroupFinder::class,
-            // Attribute groupe finder (<attributeGroup/>)
-            AttributeGroupFinder::class,
-
+            new TagFinder($this, 'Lsa\Xsl\Core\Tags'),
+            new TagGroupFinder($this, 'Lsa\Xsl\Core\Validation\TagGroups'),
+            new TypeFinder($this, 'Lsa\Xsl\Core\Validation\Types'),
+            new AttributeGroupFinder($this, 'Lsa\Xsl\Core\Validation\PropertyGroups'),
             InheritableConfiguration::PARENT,
         ]);
     }

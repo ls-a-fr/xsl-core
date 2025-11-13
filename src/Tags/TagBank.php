@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Lsa\Xsl\Core\Tags;
 
 use Lsa\Xml\Utils\Collections\NodeCollection;
+use Lsa\Xsl\Core\Exceptions\TagNotFoundException;
 use Lsa\Xsl\Core\Tags\Block\Block;
 use Lsa\Xsl\Core\Tags\Block\BlockContainer;
 use Lsa\Xsl\Core\Tags\Bookmark\Bookmark;
@@ -87,7 +88,6 @@ use Lsa\Xsl\Core\Tags\Table\TableFooter;
 use Lsa\Xsl\Core\Tags\Table\TableHeader;
 use Lsa\Xsl\Core\Tags\Table\TableRow;
 use Lsa\Xsl\Core\Xml\Tag;
-use RuntimeException;
 
 /**
  * Holds every tag used in XSL-FO specification.
@@ -108,13 +108,13 @@ class TagBank
      * @param  string  $tagName  The tag name
      * @return \Lsa\Xsl\Core\Xml\Tag The found tag
      *
-     * @throws RuntimeException
+     * @throws TagNotFoundException
      */
     public static function getOne(string $tagName): Tag
     {
         self::getBank();
         if (isset(self::$bank[$tagName]) === false) {
-            throw new RuntimeException('Tag not found');
+            throw new TagNotFoundException('Tag not found:'.$tagName);
         }
 
         return self::$bank[$tagName];

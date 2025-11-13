@@ -119,12 +119,12 @@ class EmPointConverter extends Converter
         // Performs the conversion.
         $converter = UnitConverter::make();
 
-        return $converter->normalize($this->applyEm($em, $fontValue), Token::NORMALIZED_UNIT);
+        return $converter->normalize($this->applyEm($em, $fontValue), Token::getNormalizedUnit());
     }
 
     public function convertFrom(float $value): float
     {
-        throw new InvalidFunctionTokenException('Cannot convert from '.Token::NORMALIZED_UNIT.' to em');
+        throw new InvalidFunctionTokenException('Cannot convert from '.Token::getNormalizedUnit().' to em');
     }
 
     /**

@@ -23,6 +23,11 @@ class RgbFunction extends XslFunction
         return 'rgb';
     }
 
+    /**
+     * Gets this function parameters
+     *
+     * @return list<array<self::MODE_*,self::TYPE_*>>
+     */
     public static function getParameters(): array
     {
         return [

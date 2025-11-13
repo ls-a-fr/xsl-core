@@ -9,9 +9,9 @@ use Lsa\Xml\Utils\Traits\ProvidesSelfValidation;
 use Lsa\Xml\Utils\Validation\Base\Type;
 use Lsa\Xml\Utils\Validation\Validators\EnumValidator;
 use Lsa\Xml\Utils\Validation\Validators\UnionValidator;
+use Lsa\Xsl\Core\Exceptions\ValidationException;
 use Lsa\Xsl\Core\Validation\Types\Xsl\FamilyNameType;
 use Lsa\Xsl\Core\Validation\Types\Xsl\GenericFamilyType;
-use RuntimeException;
 
 /**
  * Validates Font property.
@@ -129,7 +129,7 @@ class FontType extends Type implements Validator
             }
 
             return true;
-        } catch (RuntimeException) {
+        } catch (ValidationException) {
             return false;
         }
     }
@@ -209,7 +209,7 @@ class FontType extends Type implements Validator
      * @param  string  $value  The value to parse
      * @return string[] Font chunks found in this value
      *
-     * @throws \RuntimeException Will raise in case of an invalid value
+     * @throws ValidationException Will raise in case of an invalid value
      */
     protected function parseValue(string $value): array
     {
@@ -227,7 +227,7 @@ class FontType extends Type implements Validator
             if ($chunk === $this->lineHeightSeparator) {
                 // Set next with previous
                 if (isset($chunk[($i + 1)]) === false) {
-                    throw new RuntimeException('Cannot end with a '.$this->lineHeightSeparator);
+                    throw new ValidationException('Cannot end with a '.$this->lineHeightSeparator);
                 }
                 $updatedChunks[($i - 1)] .= $this->lineHeightSeparator.$chunk[($i + 1)];
                 $skipNext = 2;
@@ -243,7 +243,7 @@ class FontType extends Type implements Validator
             if (str_ends_with($chunk, $this->lineHeightSeparator) === true) {
                 // Set next with this one
                 if (isset($chunks[($i + 1)]) === false) {
-                    throw new RuntimeException('Cannot end with a '.$this->lineHeightSeparator);
+                    throw new ValidationException('Cannot end with a '.$this->lineHeightSeparator);
                 }
                 $updatedChunks[] = $chunk.$chunks[($i + 1)];
                 $skipNext = true;

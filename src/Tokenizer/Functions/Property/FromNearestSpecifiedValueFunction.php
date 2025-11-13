@@ -38,6 +38,11 @@ class FromNearestSpecifiedValueFunction extends XslFunction
         return 'from-nearest-specified-value';
     }
 
+    /**
+     * Gets this function parameters
+     *
+     * @return list<array<self::MODE_*,self::TYPE_*>>
+     */
     public static function getParameters(): array
     {
         return [
@@ -50,6 +55,11 @@ class FromNearestSpecifiedValueFunction extends XslFunction
         $root = $this->getRootToken();
 
         $propertyName = ($args[0] ?? $root->attribute->name);
+        if (\is_float($propertyName) === true) {
+            throw new InvalidAttributeValueParseException(
+                self::getFunctionName().'() expects string, float given'
+            );
+        }
         $currentToken = $root->tag;
         $it = $currentToken->parent();
         $foundValue = null;

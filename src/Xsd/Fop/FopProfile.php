@@ -15,6 +15,7 @@ use Lsa\Xml\Utils\Xml\XmlNamespace;
 use Lsa\Xsd\Generator\Base\Finder;
 use Lsa\Xsd\Generator\Configuration\CustomType;
 use Lsa\Xsd\Generator\Configuration\InheritableConfiguration;
+use Lsa\Xsd\Generator\Exceptions\ProfileNamingException;
 use Lsa\Xsd\Generator\Finders\AddedTypesFinder;
 use Lsa\Xsd\Generator\Finders\TagFinder;
 use Lsa\Xsd\Generator\Finders\TypeFinder as FindersTypeFinder;
@@ -102,7 +103,6 @@ use Lsa\Xsl\Core\Xsd\Fop\TagGroups\MarkerList;
 use Lsa\Xsl\Core\Xsd\Fop\Tags\XsCompoundRestriction;
 use Lsa\Xsl\Core\Xsd\Fop\Transformers\XsCompoundRestrictionTransformer;
 use Lsa\Xsl\Core\Xsd\Xsl\XslProfile;
-use RuntimeException;
 
 // phpcs:disable Generic.Files.LineLength
 /**
@@ -1094,9 +1094,9 @@ class FopProfile extends XslProfile
             AttributeGroupFinder::class,
             // Defaults
             // Type finder (<simpleType/>)
-            FindersTypeFinder::class,
+            new FindersTypeFinder($this, 'Lsa\Xsl\Core\Validation\Types'),
             // Tag finder (<element/>)
-            TagFinder::class,
+            new TagFinder($this, 'Lsa\Xsl\Core\Tags'),
             // Added types
             AddedTypesFinder::class,
         ]);
@@ -1153,7 +1153,7 @@ class FopProfile extends XslProfile
      * @param  class-string|string|object  $referencedObject  The object to reference (ex: Block::class, or an instance of this class)
      * @param  class-string  $callerClass  Class asking the name
      *
-     * @throws \RuntimeException
+     * @throws ProfileNamingException
      */
     public function getName(string|object $referencedObject, string $callerClass): string
     {
@@ -1183,7 +1183,7 @@ class FopProfile extends XslProfile
 
         $referencedClass = $this->getReferencedClass($referencedObject);
         if ($referencedClass === null) {
-            throw new RuntimeException('Cannot get referenced class');
+            throw new ProfileNamingException('Cannot get referenced class');
         }
         // An element with a name declaration (ex: `HasName` trait) should return it.
         if ($this->hasNameDeclaration($referencedObject) === true) {

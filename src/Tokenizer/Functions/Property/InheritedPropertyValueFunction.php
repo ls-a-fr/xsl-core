@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace Lsa\Xsl\Core\Tokenizer\Functions\Property;
 
+use Lsa\Xml\Utils\Exceptions\PropertyNotFoundException;
 use Lsa\Xml\Utils\Validation\PropertyBank;
 use Lsa\Xsl\Core\Exceptions\InvalidAttributeValueParseException;
 use Lsa\Xsl\Core\Tokenizer\Functions\XslFunction;
 use Lsa\Xsl\Core\Traits\DataAwareFunction;
 use Lsa\Xsl\Core\Traits\InheritableAttribute;
-use RuntimeException;
 
 /**
  * The inherited-property-value function returns the inherited value of the property whose name matches the
@@ -55,6 +55,11 @@ class InheritedPropertyValueFunction extends XslFunction
         return 'inherited-property-value';
     }
 
+    /**
+     * Gets this function parameters
+     *
+     * @return list<array<self::MODE_*,self::TYPE_*>>
+     */
     public static function getParameters(): array
     {
         return [
@@ -66,10 +71,14 @@ class InheritedPropertyValueFunction extends XslFunction
     {
         $rootToken = $this->getRootToken();
         $propertyName = ($args[0] ?? $rootToken->attribute->name);
-
+        if (\is_float($propertyName) === true) {
+            throw new InvalidAttributeValueParseException(
+                self::getFunctionName().'() expects string, float given'
+            );
+        }
         try {
             $property = PropertyBank::getOne($propertyName);
-        } catch (RuntimeException) {
+        } catch (PropertyNotFoundException) {
             throw new InvalidAttributeValueParseException('Property '.$propertyName.' does not exist');
         }
         $usedTraits = \class_uses($property);

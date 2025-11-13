@@ -4,13 +4,13 @@ declare(strict_types=1);
 
 namespace Lsa\Xsl\Core\Tokenizer\Functions\Property;
 
+use Lsa\Xml\Utils\Exceptions\PropertyNotFoundException;
 use Lsa\Xml\Utils\Validation\PropertyBank;
 use Lsa\Xsl\Core\Exceptions\InvalidAttributeValueParseException;
 use Lsa\Xsl\Core\Tags\Multi\MultiProperties;
 use Lsa\Xsl\Core\Tags\Other\Wrapper;
 use Lsa\Xsl\Core\Tokenizer\Functions\XslFunction;
 use Lsa\Xsl\Core\Traits\DataAwareFunction;
-use RuntimeException;
 
 /**
  * The merge-property-values function returns a value of the property whose name matches the argument, or if
@@ -47,6 +47,11 @@ class MergePropertyValuesFunction extends XslFunction
         return 'merge-property-values';
     }
 
+    /**
+     * Gets this function parameters
+     *
+     * @return list<array<self::MODE_*,self::TYPE_*>>
+     */
     public static function getParameters(): array
     {
         return [
@@ -60,9 +65,15 @@ class MergePropertyValuesFunction extends XslFunction
         $tag = $rootToken->tag;
         $propertyName = ($args[0] ?? $rootToken->attribute->name);
 
+        if (\is_float($propertyName) === true) {
+            throw new InvalidAttributeValueParseException(
+                self::getFunctionName().'() expects string, float given'
+            );
+        }
+
         try {
             $property = PropertyBank::getOne($propertyName);
-        } catch (RuntimeException) {
+        } catch (PropertyNotFoundException) {
             throw new InvalidAttributeValueParseException('Property '.$propertyName.' does not exist');
         }
 

@@ -33,6 +33,11 @@ class ProportionalColumnWidthFunction extends XslFunction
         return 'proportional-column-width';
     }
 
+    /**
+     * Gets this function parameters
+     *
+     * @return list<array<self::MODE_*,self::TYPE_*>>
+     */
     public static function getParameters(): array
     {
         return [
@@ -42,7 +47,11 @@ class ProportionalColumnWidthFunction extends XslFunction
 
     public function evaluate(...$args): string|float
     {
-        $columnWidth = trim($args[0]);
+        if (\is_string($args[0]) === true) {
+            $columnWidth = trim($args[0]);
+        } else {
+            $columnWidth = $args[0];
+        }
         if ((new ProportionalColumnWidthType())->validate($this->getFunctionName().'('.$columnWidth.')') === false) {
             throw new InvalidAttributeValueParseException(
                 'Invalid argument for proportional-column-width, got: '.$columnWidth

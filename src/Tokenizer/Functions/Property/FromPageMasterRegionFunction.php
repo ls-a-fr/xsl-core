@@ -105,6 +105,11 @@ class FromPageMasterRegionFunction extends XslFunction
         return 'from-page-master-region';
     }
 
+    /**
+     * Gets this function parameters
+     *
+     * @return list<array<self::MODE_*,self::TYPE_*>>
+     */
     public static function getParameters(): array
     {
         return [
@@ -112,14 +117,6 @@ class FromPageMasterRegionFunction extends XslFunction
         ];
     }
 
-    /**
-     * Evaluates this function and returns a result based on given tokens.
-     *
-     * @param  string  ...$args  Arguments for this function
-     * @return string|float Evaluation result
-     *
-     * @throws InvalidAttributeValueParseException
-     */
     public function evaluate(...$args): string|float
     {
         $currentToken = $this->getRootToken();
@@ -174,6 +171,12 @@ class FromPageMasterRegionFunction extends XslFunction
     protected function findMasterProperty(XslRootToken $token, NodeCollection $masters, string $masterName): ?string
     {
         $currentIndex = $token->tag->getCurrentIndex();
+
+        if ($currentIndex === null) {
+            throw new InvalidAttributeValueParseException(
+                'Cannot find current index for tag: '.get_class($token->tag)
+            );
+        }
         /**
          * MasterDefinition should be a Tag here.
          *

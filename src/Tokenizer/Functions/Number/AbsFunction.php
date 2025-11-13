@@ -22,6 +22,11 @@ class AbsFunction extends XslFunction
         return 'abs';
     }
 
+    /**
+     * Gets this function parameters
+     *
+     * @return list<array<self::MODE_*,self::TYPE_*>>
+     */
     public static function getParameters(): array
     {
         return [
@@ -33,13 +38,17 @@ class AbsFunction extends XslFunction
     {
         $converter = UnitConverter::make();
         if ($converter->hasUnit($args[0]) === false) {
-            if (\is_numeric($args[0]) === false || \str_ends_with($args[0], '.') === true) {
+            if (
+                \is_string($args[0]) === true
+                && (\is_numeric($args[0]) === false || \str_ends_with($args[0], '.') === true)
+            ) {
                 throw new InvalidFunctionTokenException('Argument in abs() function must be numeric, found: '.$args[0]);
             }
 
             return abs(\floatval($args[0]));
         }
 
+        assert(\is_string($args[0]) === true);
         $unit = $converter->getUnit($args[0]);
 
         return abs($converter->stripUnit($args[0])).$unit;

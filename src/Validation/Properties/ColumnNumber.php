@@ -104,6 +104,13 @@ class ColumnNumber extends TypedAttribute implements CanFormatValue, HasDefaultV
 
         $computedValue = 0;
         while ($it !== null) {
+            // Ignore text nodes
+            if (($it instanceof EmptyTag) === false) {
+                $it = $it->previousSibling();
+
+                continue;
+            }
+
             $value = $it->attributes->get('column-number');
             if ($value !== null) {
                 return strval(intval($value) + $computedValue);

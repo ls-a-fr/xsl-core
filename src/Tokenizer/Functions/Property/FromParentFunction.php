@@ -4,13 +4,13 @@ declare(strict_types=1);
 
 namespace Lsa\Xsl\Core\Tokenizer\Functions\Property;
 
+use Lsa\Xml\Utils\Exceptions\PropertyNotFoundException;
 use Lsa\Xml\Utils\Validation\PropertyBank;
 use Lsa\Xsl\Core\Contracts\HasDefaultValue;
 use Lsa\Xsl\Core\Contracts\HasDefaultValueWithContext;
 use Lsa\Xsl\Core\Exceptions\InvalidAttributeValueParseException;
 use Lsa\Xsl\Core\Tokenizer\Functions\XslFunction;
 use Lsa\Xsl\Core\Traits\DataAwareFunction;
-use RuntimeException;
 
 /**
  * The from-parent function returns a computed value (see 5.1 Specified, Computed, and Actual Values, and
@@ -41,6 +41,11 @@ class FromParentFunction extends XslFunction
         return 'from-parent';
     }
 
+    /**
+     * Gets this function parameters
+     *
+     * @return list<array<self::MODE_*,self::TYPE_*>>
+     */
     public static function getParameters(): array
     {
         return [
@@ -48,22 +53,21 @@ class FromParentFunction extends XslFunction
         ];
     }
 
-    /**
-     * Evaluates this function and returns a result based on given tokens.
-     *
-     * @param  string  ...$args  Arguments for this function
-     * @return string|float Evaluation result
-     *
-     * @throws InvalidAttributeValueParseException
-     */
     public function evaluate(...$args): string|float
     {
         $root = $this->getRootToken();
         $currentToken = $root->tag;
+        $propertyName = ($args[0] ?? $root->attribute->name);
+
+        if (\is_float($propertyName) === true) {
+            throw new InvalidAttributeValueParseException(
+                self::getFunctionName().'() expects string, float given'
+            );
+        }
+
         try {
-            $propertyName = ($args[0] ?? $root->attribute->name);
             $property = PropertyBank::getOne($propertyName);
-        } catch (RuntimeException) {
+        } catch (PropertyNotFoundException) {
             throw new InvalidAttributeValueParseException('Invalid property found on from-parent: '.$propertyName);
         }
 

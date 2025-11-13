@@ -23,6 +23,11 @@ class MaxFunction extends XslFunction
         return 'max';
     }
 
+    /**
+     * Gets this function parameters
+     *
+     * @return list<array<self::MODE_*,self::TYPE_*>>
+     */
     public static function getParameters(): array
     {
         return [
@@ -37,6 +42,9 @@ class MaxFunction extends XslFunction
         if ($converter->hasUnit($args[0]) === false && $converter->hasUnit($args[1]) === false) {
             return max($args[0], $args[1]);
         }
+
+        assert(\is_string($args[0]) === true);
+        assert(\is_string($args[1]) === true);
 
         try {
             $unit1 = $converter->getUnit($args[0]);

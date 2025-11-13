@@ -10,8 +10,8 @@ use Lsa\Xml\Utils\Validation\Base\Type;
 use Lsa\Xml\Utils\Validation\Validators\EnumValidator;
 use Lsa\Xml\Utils\Validation\Validators\UnionValidator;
 use Lsa\Xml\Utils\Xml\Base\Tag;
+use Lsa\Xsl\Core\Exceptions\ValidationException;
 use Lsa\Xsl\Core\Validation\Types\Xsl\BaseColorType;
-use RuntimeException;
 
 /**
  * Validates BorderColor property.
@@ -53,7 +53,7 @@ class BorderMultiColorType extends Type implements Validator
             }
 
             return true;
-        } catch (RuntimeException) {
+        } catch (ValidationException) {
             return false;
         }
     }
@@ -64,7 +64,7 @@ class BorderMultiColorType extends Type implements Validator
      * @param  string  $value  The value to parse
      * @return string[] Colors found in this value
      *
-     * @throws \RuntimeException
+     * @throws ValidationException
      */
     protected function parseValue(string $value): array
     {
@@ -75,10 +75,10 @@ class BorderMultiColorType extends Type implements Validator
         for ($i = 0; $i < $valueLength; $i++) {
             $char = $value[$i];
             if ($char === '(' && $inParenthesis === true) {
-                throw new RuntimeException('Cannot have depth > 1');
+                throw new ValidationException('Cannot have depth > 1');
             }
             if ($char === ')' && $inParenthesis === false) {
-                throw new RuntimeException('Syntax error');
+                throw new ValidationException('Syntax error');
             }
             if ($char === ' ' && $inParenthesis === false) {
                 if ($chunks[$chunkIndex] !== '') {

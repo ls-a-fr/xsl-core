@@ -22,6 +22,11 @@ class BodyStartFunction extends XslFunction
         return 'body-start';
     }
 
+    /**
+     * Gets this function parameters
+     *
+     * @return list<array<self::MODE_*,self::TYPE_*>>
+     */
     public static function getParameters(): array
     {
         return [];
